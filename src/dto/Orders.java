@@ -12,6 +12,7 @@ public class Orders {
 	private String orders_payment_type;
 	private String orders_type="offline";
 	private String product_name;
+	private int price;
 	
 	public int getOrders_id() {
 		return orders_id;
@@ -66,6 +67,12 @@ public class Orders {
 	}
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
 	

@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import db.DBManager;
+import dto.Emp;
+import dto.Orders;
 import order.payment.Payment;
 import pos.login.PosWindow;
 
@@ -46,6 +48,8 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 	PosWindow posWindow;
 	int total;
 	int order_number=1;
+
+	Emp emp;
 
 	public OrderMain(PosWindow posWindow) {
 		this.posWindow =posWindow;
@@ -187,6 +191,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		thread.start();
 	
 		init();
+		getEmp();
 		getMenu();
 		getSubMenu();
 
@@ -198,6 +203,33 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		manager=DBManager.getInstance();
 		con=manager.getConnection();
 		System.out.println(con);
+	}
+	
+	public void getEmp() {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from emp where emp_login_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, posWindow.id);
+			rs=pstmt.executeQuery();
+			
+			rs.next();
+			
+			emp = new Emp();
+					
+			emp.setEmp_id(rs.getInt("emp_id"));
+			emp.setEmp_login_id(rs.getString("emp_login_id"));
+			emp.setEmp_login_pw(rs.getString("emp_login_id"));
+			emp.setEmp_name(rs.getString("emp_name"));
+			emp.setEmp_phone(rs.getString("emp_phone"));
+			emp.setEmp_job(rs.getString("emp_job"));
+			emp.setEmp_id(rs.getInt("emp_sal"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//상위 버튼들 가져오기
@@ -361,8 +393,10 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 			Orders orders=new Orders();
 			
 			orders.setProduct_id(id);
-			orders.setOrders_emp_id(2);
+			orders.setOrders_emp_id(emp.getEmp_id());
 			orders.setOrders_client_id(order_number);
+			orders.setProduct_name(menu_list.get(i).info.getProduct_name());
+			orders.setPrice(menu_list.get(i).info.getProduct_price());
 			
 			orders_list.add(orders);
 			
