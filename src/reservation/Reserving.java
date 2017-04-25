@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -15,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import dto.Reservation;
-import json.ReservationProtocol;
 
 public class Reserving extends JFrame implements ActionListener{
 	JPanel p_center, p_south;
@@ -68,8 +68,9 @@ public class Reserving extends JFrame implements ActionListener{
 		add(p_center);
 		add(p_south, BorderLayout.SOUTH);
 		
-		setSize(200, 100);
+		setSize(200, 150);
 		setVisible(true);
+		setLocationRelativeTo(reservationMain);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
@@ -89,7 +90,7 @@ public class Reserving extends JFrame implements ActionListener{
 			
 		}
 		
-		ReservationThread thread = new ReservationThread(resList, "insert");
+		ReservationThread thread = new ReservationThread(resList, "insert", this, reservationMain);
 		thread.start();
 		
 	}

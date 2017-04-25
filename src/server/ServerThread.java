@@ -29,6 +29,7 @@ public class ServerThread extends Thread {
 	Connection con;
 	JSONObject obj;
 	String type;
+	String resType;
 
 	public ServerThread(Socket socket) {
 		this.socket = socket;
@@ -105,18 +106,57 @@ public class ServerThread extends Thread {
 	}
 	
 	public void reservationType() {
-		String type = (String) obj.get("type");
-		
+		resType = (String) obj.get("type");
+		System.out.println("서버스레드 : " + resType);
 		PreparedStatement pstmt = null;
 		
-		if(type.equals("insert")) {
+		if(resType.equals("insert")) {
 			String sql = "insert into reservation(reservation_room_num, reservation_current_time, reservation_member_login_id, reservation_time_unit, reservation_start_time, reservation_year, reservation_month, reservation_date) values(?, current_timestamp(), ?, ?, ?, ?, ?, ?)";
-		} else if(type.equals("update")) {
-			String sql = "update reservation set reservation_time_unit = ? where ";
-
-		} else if(type.equals("delete")) {
-			String sql = "delete from reservation where ";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				System.out.println("insert : " + sql);
+				pstmt.setInt(1, Long.valueOf((long)obj.get("reservation_room_num")).intValue());
+				pstmt.setString(2, (String)obj.get("reservation_member_login_id"));
+				pstmt.setInt(3, Long.valueOf((long)obj.get("reservation_time_unit")).intValue());
+				pstmt.setInt(4, Long.valueOf((long)obj.get("reservation_start_time")).intValue());
+				pstmt.setInt(5, Long.valueOf((long)obj.get("reservation_year")).intValue());
+				pstmt.setInt(6, Long.valueOf((long)obj.get("reservation_month")).intValue());
+				pstmt.setInt(7, Long.valueOf((long)obj.get("reservation_date")).intValue());
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result != 0) {
+					System.out.println("성공");
+					send();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		} else if(resType.equals("delete")) {
+			String sql = "delete from reservation where reservation_year = ? and reservation_month = ? and reservation_date = ? and reservation_start_time = ?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				System.out.println("delete : " + sql);
+				pstmt.setInt(1, Long.valueOf((long)obj.get("reservation_year")).intValue());
+				pstmt.setInt(2, Long.valueOf((long)obj.get("reservation_month")).intValue());
+				pstmt.setInt(3, Long.valueOf((long)obj.get("reservation_date")).intValue());
+				pstmt.setInt(4, Long.valueOf((long)obj.get("reservation_start_time")).intValue());
+				
+				int result = pstmt.executeUpdate();
+				System.out.println(Long.valueOf((long)obj.get("reservation_start_time")).intValue() + "시 결과 : " + result);
+				if(result != 0) {
+					System.out.println("성공");
+					send();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
+		
 	}
 
 	public void EditMember() {
@@ -184,7 +224,7 @@ public class ServerThread extends Thread {
 				type = "card";
 				insertCard();
 			} else if(requestType.equals("reservation")) {
-				type = "card";
+				type = "reservation";
 				reservationType();
 			} else if(requestType.equals("member")){
 				type = "member";
@@ -208,8 +248,10 @@ public class ServerThread extends Thread {
 			str = "주문완료";
 		} else if(type.equals("card")) {
 			str = "카드등록완료";
-		} else if(type.equals("reservation")) {
+		} else if(type.equals("reservation") && resType.equals("insert")) {
 			str = "예약 완료";
+		} else if(type.equals("reservation") && resType.equals("delete")) {
+			str = "예약 변경&삭제 완료";
 		} else if(type.equals("member")) {
 			str = "회원수정완료";
 		} 
