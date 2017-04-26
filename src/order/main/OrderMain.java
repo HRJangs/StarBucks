@@ -401,7 +401,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 			orders_list.add(orders);
 			
 		}
-		new Payment(orders_list, total);
+		new Payment(orders_list, total, emp);
 		order_number++;
 		
 		menu_list.removeAll(menu_list);
