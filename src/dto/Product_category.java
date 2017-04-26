@@ -1,6 +1,6 @@
 //커피,빵 ,음료를 가져오게해
 
-package order.main;
+package dto;
 
 public class Product_category {
 	private int Product_category_id;
