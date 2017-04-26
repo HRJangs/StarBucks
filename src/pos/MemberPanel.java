@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,7 +23,7 @@ public class MemberPanel extends MyPanel implements ActionListener,TableModelLis
 	JLabel la_name;
 	Choice choice;
 	JButton bt_search,bt_edit,bt_coupon,bt_origin;
-
+	int row,col;
 	public MemberPanel() {
 		la_name =new JLabel("이름");
 		choice = new Choice();
@@ -48,9 +50,16 @@ public class MemberPanel extends MyPanel implements ActionListener,TableModelLis
 		//bt_edit.addActionListener(this);
 		bt_search.addActionListener(this);
 		bt_origin.addActionListener(this);
+		bt_coupon.addActionListener(this);
 		model =(DataModel) dataController.getDataModel();
 		model.addTableModelListener(this);
-		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				row= table.getSelectedRow();
+				col=table.getSelectedColumn();
+			}
+		});
 		
 		table.setModel(model);
 		add(p_north,BorderLayout.NORTH);
@@ -73,7 +82,11 @@ public class MemberPanel extends MyPanel implements ActionListener,TableModelLis
 		//dataController.SearchMember();
 	}
 	public void sendCoupon(){
-		JOptionPane.showMessageDialog(this, "쿠폰을 보내겠습니다");
+		String str =(String) dataController.data.get(row).get(1);
+		System.out.println(str);
+		dataController.coupon.removeAll(dataController.coupon);
+		dataController.getCoupon();
+		new IssueCoupon(dataController,str);
 	}
 	
 	public void tableChanged(TableModelEvent e) {
