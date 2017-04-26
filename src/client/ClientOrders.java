@@ -50,6 +50,8 @@ public class ClientOrders extends JPanel implements ActionListener {
 		la_count = new JLabel();
 		la_sum = new JLabel();
 		la_null = new JLabel("담긴 메뉴가 없습니다.");
+		
+		la_null.setFont(new Font("돋움", Font.BOLD, 25));
 
 		p_center.add(la_null);
 

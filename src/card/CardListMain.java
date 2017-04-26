@@ -175,6 +175,8 @@ public class CardListMain extends JPanel implements ActionListener {
 
 			p_center.add(panel);
 			p_center.updateUI();
+			
+			panel.addMouseListener(new CardMouseAdapter(card_list.get(i), this));
 
 		}
 	}

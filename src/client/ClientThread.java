@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import dto.Product;
 import json.OrdersProtocol;
@@ -60,9 +61,10 @@ public class ClientThread extends Thread{
 			if(data.equals("주문완료")){
 				main.orders.p_center.removeAll();
 				pmain.dispose();
-				JLabel la = new JLabel("주문완료! 창구를 확인해주세요");
-				la.setFont(new Font("돋움", Font.BOLD, 30));
-				main.orders.p_center.add(la);
+				//JLabel la = new JLabel("주문완료! 창구를 확인해주세요");
+				//la.setFont(new Font("돋움", Font.BOLD, 30));
+				//main.orders.p_center.add(la);
+				JOptionPane.showMessageDialog(main, "주문 완료되었습니다.");
 				main.orders.p_center.updateUI();
 			}
 		} catch (IOException e) {

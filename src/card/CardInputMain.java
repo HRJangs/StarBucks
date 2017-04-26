@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dto.Card;
@@ -24,7 +25,8 @@ public class CardInputMain extends JFrame implements ActionListener{
 	JPanel p_center, p_south, p1, p2, p3, p4;
 	JTextField t_num1, t_num2, t_num3, t_num4;
 	JLabel la_company_name, la_num, la_name, la_valid, la_dash1, la_dash2, la_dash3, la_slash, la_pw;
-	JTextField t_name, t_pw;
+	JTextField t_name;
+	JPasswordField t_pw;
 	Choice ch_month, ch_year;
 	JButton bt_commit, bt_cancel;
 	
@@ -55,7 +57,7 @@ public class CardInputMain extends JFrame implements ActionListener{
 		la_pw = new JLabel("카드 비밀번호 입력");
 		
 		t_name = new JTextField(20);
-		t_pw = new JTextField(20);
+		t_pw = new JPasswordField(20);
 		
 		ch_month = new Choice();
 		ch_year = new Choice();
@@ -166,8 +168,10 @@ public class CardInputMain extends JFrame implements ActionListener{
 		card.setCard_username(name);
 		card.setCard_valid(valid);
 		card.setCard_companyname(company_name);
+		card.setCard_password(pw);
+		card.setCard_id(0);
 		
-		CardThread thread = new CardThread(card, this);
+		CardThread thread = new CardThread(card, this, "insert");
 		thread.start();
 	}
 

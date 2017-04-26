@@ -1,5 +1,6 @@
 package card;
 
+import java.awt.Container;
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +18,8 @@ import json.CardProtocol;
 
 public class CardThread extends Thread{
 	Card card;
-	CardInputMain main;
+	Container main;
+	String type;
 	
 	Socket socket;
 	int port = 7777;
@@ -26,9 +28,10 @@ public class CardThread extends Thread{
 	BufferedReader buffr;
 	BufferedWriter buffw;
 	
-	public CardThread(Card card, CardInputMain main) {
+	public CardThread(Card card, Container main, String type) {
 		this.card = card;
 		this.main = main;
+		this.type = type;
 		
 		try {
 			socket = new Socket(host, port);
@@ -55,9 +58,14 @@ public class CardThread extends Thread{
 			
 			if(data.equals("카드등록완료")){
 				JOptionPane.showMessageDialog(main, "카드 등록 성공!");
-				main.dispose();
-				main.main.dispose();
-				main.main.main.getList();
+				CardInputMain cmain = (CardInputMain)main;
+				cmain.dispose();
+				cmain.main.dispose();
+				cmain.main.main.getList();
+			} else if(data.equals("카드삭제완료")) {
+				CardListMain listMain = (CardListMain)main;
+				JOptionPane.showMessageDialog(main, "카드 삭제 성공!");
+				listMain.getList();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,7 +73,7 @@ public class CardThread extends Thread{
 	}
 	
 	public void send() {
-		CardProtocol protocol = new CardProtocol(card);
+		CardProtocol protocol = new CardProtocol(card, type);
 		String msg = protocol.getProtocol();
 		
 		try {
