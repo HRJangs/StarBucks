@@ -527,7 +527,6 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 			orders.setOrders_client_id(order_number);
 			orders.setProduct_name(menu_list.get(i).info.getProduct_name());
 			orders.setPrice(menu_list.get(i).info.getProduct_price());
-			
 			orders_list.add(orders);
 			
 		}
@@ -539,8 +538,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		p_component.updateUI();
 		la_sum.setText("0");
 		p_sum.updateUI();
-		
-		System.out.println(orders_list.size());
+		orders_list.removeAll(orders_list);
 		
 	}
 

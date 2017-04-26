@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
@@ -28,15 +29,16 @@ import dto.Orders;
 
 public class Payment extends JFrame implements ActionListener{
 	JPanel p_menu;
-	PaymentPanel p_cash, p_credit, p_coupon;
+	PaymentPanel p_cash, p_credit;
+	CouponPanel p_coupon;
 	JButton bt_cash, bt_credit, bt_coupon;
 	JLabel la_cash_in, la_cash_cost, la_cash_out;
 	JLabel la_credit_cost, la_credit_number, la_credit_company;
-	JLabel la_coupon_number;
+
 	JTextField t_cash_in, t_cash_cost, t_cash_out;
 	JTextField t_credit_cost, t_credit_number, t_credit_company;
-	JTextField t_coupon_number;
-	Vector<Orders> orders_list; //주문정보 dto꾸러미
+
+	Vector<Orders> orders_list = new Vector<Orders>(); //주문정보 dto꾸러미
 	int price;//결제 총 금액
 	JButton bt_cardRead;//카드정보 읽어들이기
 	Emp emp;//주문 받은 직원 정보
@@ -50,7 +52,11 @@ public class Payment extends JFrame implements ActionListener{
 	
 	public Payment(Vector<Orders> orders_list, int price, Emp emp) {
 		this.emp=emp;
-		this.orders_list=orders_list;
+		
+		//일단 리스트는 가져오는데 0으로 처리되니깐 일단 이걸 막아놔야한다~!
+		for(int i=0; i<orders_list.size();i++){
+			this.orders_list.add(orders_list.get(i));
+		}
 		this.price=price;//총액
 		setLayout(new FlowLayout());
 		
@@ -58,12 +64,19 @@ public class Payment extends JFrame implements ActionListener{
 		p_menu = new JPanel();
 		p_cash = new PaymentPanel(this, "cash");
 		p_credit = new PaymentPanel(this, "credit");
-		p_coupon = new PaymentPanel(this, "coupon");
+		p_coupon = new CouponPanel(this, "coupon");
 		
 		//각 버튼들
 		bt_cash = new JButton("현금");
 		bt_credit = new JButton("카드");
 		bt_coupon = new JButton("쿠폰");
+		
+		//쿠폰 버튼은 상품이 1개만 선택되었을때만 눌리도록 해주자~!
+		if(orders_list.size()!=1){
+			bt_coupon.setEnabled(false);
+		}else{
+			bt_coupon.setEnabled(true);
+		}
 		
 		bt_cardRead = new JButton("카드긁기");
 		
@@ -76,7 +89,7 @@ public class Payment extends JFrame implements ActionListener{
 		la_credit_number = new JLabel("카드번호");
 		la_credit_company = new JLabel("카드사");
 		
-		la_coupon_number = new JLabel("쿠폰번호");
+		
 		
 		//각 텍스트필드
 		t_cash_in = new JTextField(18);
@@ -87,7 +100,7 @@ public class Payment extends JFrame implements ActionListener{
 		t_credit_number = new JTextField(18);
 		t_credit_company = new JTextField(18);
 		
-		t_coupon_number = new JTextField(20);
+		
 		
 				
 		//결제금액은 변경 금지
@@ -124,9 +137,7 @@ public class Payment extends JFrame implements ActionListener{
 		p_credit.p_center.add(t_credit_company);
 		p_credit.p_center.add(bt_cardRead);
 		
-		//쿠폰패널 설정
-		p_coupon.p_center.add(la_coupon_number);
-		p_coupon.p_center.add(t_coupon_number);
+
 		
 		//색깔설정
 		p_menu.setBackground(Color.BLACK);
@@ -161,6 +172,7 @@ public class Payment extends JFrame implements ActionListener{
 					int cost=Integer.parseInt(t_cash_cost.getText());
 					t_cash_out.setText(Integer.toString(in-cost));
 					t_cash_out.updateUI();
+					p_cash.completeFlag();//현금 엔터 눌러야 결제완료 되게 하기~!
 				}
 			}
 		});
@@ -184,7 +196,6 @@ public class Payment extends JFrame implements ActionListener{
 		}else if(obj==bt_coupon){
 			p_menu.setVisible(false);
 			p_coupon.setVisible(true);
-			couponReader();
 		}else if(obj==bt_cardRead){
 			cardReader();
 		}
@@ -198,8 +209,7 @@ public class Payment extends JFrame implements ActionListener{
 		t_credit_company.setText(cardCompany);
 		
 		cardSign();
-		
-//		p_credit.p_center.updateUI();
+				
 	}
 			
 	public void cardSign(){	
@@ -226,11 +236,18 @@ public class Payment extends JFrame implements ActionListener{
 			}
 		});
 		
+		can_credit.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				p_credit.completeFlag();//싸인 들어와야 결제완료 버튼 눌러지게 하기~!
+			}
+		});
+		
 		bt_erase = new JButton("서명 취소");
 		bt_erase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				point_list.removeAllElements();
-				can_credit.repaint();				
+				can_credit.repaint();
+				p_credit.bt_payment_complete.setEnabled(false); //싸인 지우면 결제완료 안눌리게하기~!
 			}
 		});
 		
@@ -241,20 +258,7 @@ public class Payment extends JFrame implements ActionListener{
 	}
 	
 	
-	public void couponReader(){
-		Thread thread = new Thread(){
-			public void run() {
-				try {
-					long data = (long)System.in.read();
-					System.out.println(data);
-					t_coupon_number.setText(Long.toString(data));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		thread.start();
-	}
+
 	
 	
 	

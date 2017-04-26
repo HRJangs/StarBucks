@@ -30,6 +30,7 @@ public class ServerThread extends Thread {
 	JSONObject obj;
 	String type;
 	String resType;
+	String cardType;
 
 	public ServerThread(Socket socket) {
 		this.socket = socket;
@@ -80,28 +81,52 @@ public class ServerThread extends Thread {
 		}
 	}
 	
-	public void insertCard() {
+	public void sendCard() {
+		cardType = (String) obj.get("type");
 		PreparedStatement pstmt = null;
-		String sql = "insert into card(member_id, card_number, card_username, card_valid, card_companyname) values(?, ?, ?, ?, ?)";
 		
-		try {
-			pstmt = con.prepareStatement(sql);
-			//System.out.println(obj.get("member_id") instanceof Long);
-			pstmt.setInt(1,  Long.valueOf((long)obj.get("member_id")).intValue());
-			pstmt.setString(2, (String)obj.get("card_number"));
-			pstmt.setString(3, (String)obj.get("card_username"));
-			pstmt.setString(4, (String)obj.get("card_valid"));
-			pstmt.setString(5, (String)obj.get("card_companyname"));
+		if(cardType.equals("insert")) {
+			String sql = "insert into card(member_id, card_number, card_username, card_valid, card_companyname, card_password) values(?, ?, ?, ?, ?, ?)";
 			
-			int result = pstmt.executeUpdate();
-			
-			if(result != 0) {
-				System.out.println("성공");
-				send();
+			try {
+				pstmt = con.prepareStatement(sql);
+				//System.out.println(obj.get("member_id") instanceof Long);
+				pstmt.setInt(1,  Long.valueOf((long)obj.get("member_id")).intValue());
+				pstmt.setString(2, (String)obj.get("card_number"));
+				pstmt.setString(3, (String)obj.get("card_username"));
+				pstmt.setString(4, (String)obj.get("card_valid"));
+				pstmt.setString(5, (String)obj.get("card_companyname"));
+				pstmt.setString(6, (String)obj.get("card_password"));
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result != 0) {
+					System.out.println("성공");
+					send();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} else if(cardType.equals("delete")) {
+			String sql = "delete from card where card_id = ?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1,  Long.valueOf((long)obj.get("card_id")).intValue());
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result != 0) {
+					System.out.println("성공");
+					send();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
 		
 	}
 	
@@ -222,7 +247,7 @@ public class ServerThread extends Thread {
 				sendQuery();
 			} else if(requestType.equals("card")) {
 				type = "card";
-				insertCard();
+				sendCard();
 			} else if(requestType.equals("reservation")) {
 				type = "reservation";
 				reservationType();
@@ -246,8 +271,10 @@ public class ServerThread extends Thread {
 		
 		if(type.equals("order")) {
 			str = "주문완료";
-		} else if(type.equals("card")) {
+		} else if(type.equals("card") && cardType.equals("insert")) {
 			str = "카드등록완료";
+		} else if(type.equals("card") && cardType.equals("delete")) {
+			str = "카드삭제완료";
 		} else if(type.equals("reservation") && resType.equals("insert")) {
 			str = "예약 완료";
 		} else if(type.equals("reservation") && resType.equals("delete")) {

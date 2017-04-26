@@ -30,14 +30,14 @@ public class MyReservation extends JFrame implements ActionListener{
 	int date;
 	int time;
 	int maxUnit;
-	String resveStatus;
+	String type;
 	
-	public MyReservation(ReservationMain reservationMain, int date, int time, int maxUnit, String resveStatus) {
+	public MyReservation(ReservationMain reservationMain, int date, int time, int maxUnit, String type) {
 		this.reservationMain = reservationMain;
 		this.date = date;
 		this.time = time;
-		this.resveStatus = resveStatus;
 		this.maxUnit = maxUnit;
+		this.type = type;
 		
 		p_center = new JPanel();
 		p_south = new JPanel();
@@ -81,48 +81,32 @@ public class MyReservation extends JFrame implements ActionListener{
 	}
 	
 	public void updateReservation() {
-		System.out.println("update : " + resveStatus);
-		ReservationThread thread;
 		resList.removeAll(resList);
-
-		if(resveStatus.equals("otherreserve")) {
-			//변경되는거 없네
-		} else if(resveStatus.equals("noreserve")) {
-			//내 예약이 한시간인데 두시간으로 바꾸면 insert문 날리기
-			if(selectTime == 2) {
-				Reservation reservation = new Reservation();
-				reservation.setReservation_room_num(reservationMain.roomNum);
-				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
-				reservation.setReservation_year(reservationMain.year);
-				reservation.setReservation_month(reservationMain.month + 1);
-				reservation.setReservation_date(date);	
-				reservation.setReservation_time_unit(1);
-				reservation.setReservation_start_time(time + 1);
-				
-				resList.add(reservation);
+		
+		ReservationThread thread;
+		System.out.println("type : " + type);
+		if(type.equals("insertNext")) {
+			if(selectTime == 1) {
+				System.out.println("변경 사항 없음.");
+			} else if(selectTime == 2) {
+				for(int i = 0; i < selectTime; i++) {
+					Reservation reservation = new Reservation();
+					reservation.setReservation_room_num(reservationMain.roomNum);
+					reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
+					reservation.setReservation_year(reservationMain.year);
+					reservation.setReservation_month(reservationMain.month + 1);
+					reservation.setReservation_date(date);	
+					reservation.setReservation_time_unit(1);
+					reservation.setReservation_start_time(time + i);
+					
+					resList.add(reservation);
+				}
 				
 				thread = new ReservationThread(resList, "insert", this, reservationMain);
 				thread.start();
 			}
-		} else if(resveStatus.equals("myreserve")) {
-			//내 예약이 두시간인데 한시간으로 바꾸면 delete문 날리기
-			if(selectTime == 1) {
-				Reservation reservation = new Reservation();
-				reservation.setReservation_room_num(reservationMain.roomNum);
-				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
-				reservation.setReservation_year(reservationMain.year);
-				reservation.setReservation_month(reservationMain.month + 1);
-				reservation.setReservation_date(date);	
-				reservation.setReservation_time_unit(1);
-				reservation.setReservation_start_time(time + 1);
-				
-				resList.add(reservation);
-				
-				thread = new ReservationThread(resList, "delete", this, reservationMain);
-				thread.start();
-			}
 			
-		} else if(resveStatus.equals("myreserve_prev") || resveStatus.equals("myreserve_both")) {
+		} else if(type.equals("prev") || type.equals("next")) {
 			if(selectTime == 1) {
 				Reservation reservation = new Reservation();
 				reservation.setReservation_room_num(reservationMain.roomNum);
@@ -137,69 +121,66 @@ public class MyReservation extends JFrame implements ActionListener{
 				
 				thread = new ReservationThread(resList, "delete", this, reservationMain);
 				thread.start();
+
 			}
-		} 
-	
+			else {
+				System.out.println("변경 사항 없음.");
+			}
+		} else if(type.equals("only")) {
+			System.out.println("변경사항 없음.");
+		}
+
 	}
 	
 	public void deleteReservation() {
-		System.out.println("delete : " + resveStatus);
-		ReservationThread thread;
-		
 		resList.removeAll(resList);
 		
-		if(resveStatus.equals("otherreserve") || resveStatus.equals("noreserve")) {
-			//1시간 삭제
-			Reservation reservation = new Reservation();
-			reservation.setReservation_room_num(reservationMain.roomNum);
-			reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
-			reservation.setReservation_year(reservationMain.year);
-			reservation.setReservation_month(reservationMain.month + 1);
-			reservation.setReservation_date(date);
-			reservation.setReservation_start_time(time);
-			reservation.setReservation_time_unit(1);
-			
-			resList.add(reservation);
-			
-		} else if(resveStatus.equals("myreserve")) {
-			//2시간 삭제
-			for(int i = 0; i < 2; i++) {
+		ReservationThread thread;
+
+		if(type.equals("insertNext") || type.equals("only")) {
 				Reservation reservation = new Reservation();
 				reservation.setReservation_room_num(reservationMain.roomNum);
 				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
 				reservation.setReservation_year(reservationMain.year);
 				reservation.setReservation_month(reservationMain.month + 1);
-				reservation.setReservation_date(date);
-				reservation.setReservation_start_time(time + i);
+				reservation.setReservation_date(date);	
 				reservation.setReservation_time_unit(1);
-				
+				reservation.setReservation_start_time(time);
+					
 				resList.add(reservation);
-				System.out.println("delete myreserve : " + resList.size() + ", time : " + reservation.getReservation_start_time());
-			}
+				
+				
 			
-		} else if(resveStatus.equals("myreserve_both") || resveStatus.equals("myreserve_prev")) {
+		} else if(type.equals("prev")) {
 			for(int i = 0; i < 2; i++) {
 				Reservation reservation = new Reservation();
 				reservation.setReservation_room_num(reservationMain.roomNum);
 				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
 				reservation.setReservation_year(reservationMain.year);
 				reservation.setReservation_month(reservationMain.month + 1);
-				reservation.setReservation_date(date);
+				reservation.setReservation_date(date);	
+				reservation.setReservation_time_unit(1);
 				reservation.setReservation_start_time(time - i);
-				reservation.setReservation_time_unit(1);
 				
 				resList.add(reservation);
-				System.out.println("resList : " + resList.get(i).getReservation_start_time());
 			}
-		}
-		
-		for(int i = 0; i < resList.size(); i++) {
-			System.out.println(resList.size() + " myreservation : " + resList.get(i).getReservation_start_time());
+		} else if(type.equals("next")) {
+			for(int i = 0; i < 2; i++) {
+				Reservation reservation = new Reservation();
+				reservation.setReservation_room_num(reservationMain.roomNum);
+				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
+				reservation.setReservation_year(reservationMain.year);
+				reservation.setReservation_month(reservationMain.month + 1);
+				reservation.setReservation_date(date);	
+				reservation.setReservation_time_unit(1);
+				reservation.setReservation_start_time(time + i);
+				
+				resList.add(reservation);
+			}
 		}
 		
 		thread = new ReservationThread(resList, "delete", this, reservationMain);
 		thread.start();
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {

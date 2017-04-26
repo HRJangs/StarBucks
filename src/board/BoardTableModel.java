@@ -15,7 +15,7 @@ public class BoardTableModel extends AbstractTableModel{
 	DBManager manager = DBManager.getInstance();
 	Connection con;
 	Vector<Board> board_list;
-	String[] columnName = {"게시번호", "제목", "작성자", "등록시간", "조회수"};
+	String[] columnName = {"글번호", "제목", "작성자", "등록시간", "조회수"};
 	Vector<Vector> list = new Vector<Vector>();
 	
 	public BoardTableModel(Vector<Board> board_list) {

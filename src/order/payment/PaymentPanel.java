@@ -38,6 +38,10 @@ public class PaymentPanel extends JPanel implements ActionListener{
 		bt_back = new JButton("뒤로");
 		bt_payment_complete = new JButton("결제완료");
 		
+		//일단은 false로 만들어놓고 나중에 true로 바꾸자~!
+		bt_payment_complete.setEnabled(false);
+		
+		
 		p_south.add(bt_back);
 		p_south.add(bt_payment_complete);
 		
@@ -56,7 +60,6 @@ public class PaymentPanel extends JPanel implements ActionListener{
 		//연결부터
 		manager = DBManager.getInstance();
 		con=manager.getConnection();
-		
 	}
 	
 	//dto를 주문 관리자에게 보내기
@@ -110,10 +113,21 @@ public class PaymentPanel extends JPanel implements ActionListener{
 		 if(obj==bt_back){
 			 PaymentPanel.this.setVisible(false);
 			 payment.p_menu.setVisible(true);
+			 
 		}else if(obj==bt_payment_complete){
+			if(orders_payment_type.equalsIgnoreCase("coupon")){
+				setCouponStatus();
+			}
 			send();
-
 		}
+	}
+	
+	public void completeFlag(){
+		bt_payment_complete.setEnabled(true);
+	}
+	
+	public void setCouponStatus(){
+		
 	}
 
 }

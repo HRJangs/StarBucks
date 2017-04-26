@@ -39,7 +39,7 @@ public class ClientOrders extends JPanel implements ActionListener {
 
 		scroll.setPreferredSize(new Dimension(300 * 2, 400));
 		scroll2.setPreferredSize(new Dimension(300 * 2, 200));
-		p_center.setPreferredSize(new Dimension(580, main.product_list.size() * 30));
+		p_center.setPreferredSize(new Dimension(580, main.product_list.size() * 40));
 		p_south.setPreferredSize(new Dimension(300 * 2, 50 * 2));
 		p_sum.setPreferredSize(new Dimension(300 * 2, 50));
 		p_north.setPreferredSize(new Dimension(580, main.product_list.size() * 90));
@@ -50,6 +50,8 @@ public class ClientOrders extends JPanel implements ActionListener {
 		la_count = new JLabel();
 		la_sum = new JLabel();
 		la_null = new JLabel("담긴 메뉴가 없습니다.");
+		
+		la_null.setFont(new Font("돋움", Font.BOLD, 25));
 
 		p_center.add(la_null);
 
@@ -118,12 +120,13 @@ public class ClientOrders extends JPanel implements ActionListener {
 
 		// 주문하기를 눌렀을경우,
 		if (obj == bt_orders_send) {
-			JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE);
+			/*JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);*/
 
+			OrdersPay pay = new OrdersPay(main, orders_list);
 			// 라벨에 더해진 것들의 product를 가져와야한다.
-			ClientThread thread = new ClientThread(main, orders_list);
-			thread.start();
+			/*ClientThread thread = new ClientThread(main, orders_list);
+			thread.start();*/
 
 		} else if (obj == bt_orders_delete) {
 
