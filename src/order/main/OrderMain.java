@@ -26,11 +26,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -76,7 +78,12 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 	Vector<ProductPanel> menu_list=new Vector<ProductPanel>();
 	Vector<Orders> orders_list=new Vector<Orders>();
 	PosWindow posWindow;
-	
+	String[] coffee = {"http://localhost:9090/data/1.jpg","http://localhost:9090/data/2.jpg","http://localhost:9090/data/8.jpg","http://localhost:9090/data/9.jpg","http://localhost:9090/data/10.jpg",
+			"http://localhost:9090/data/11.jpg","http://localhost:9090/data/12.jpg","http://localhost:9090/data/13.jpg","http://localhost:9090/data/14.jpg","http://localhost:9090/data/15.jpg"};
+	String[] drink = {"http://localhost:9090/data/3.jpg","http://localhost:9090/data/4.jpg","http://localhost:9090/data/16.jpg","http://localhost:9090/data/17.jpg","http://localhost:9090/data/18.jpg"
+			,"http://localhost:9090/data/19.jpg","http://localhost:9090/data/20.jpg","http://localhost:9090/data/21.jpg","http://localhost:9090/data/22.jpg"};
+	String[] bread = {"http://localhost:9090/data/5.jpg","http://localhost:9090/data/6.jpg","http://localhost:9090/data/7.jpg","http://localhost:9090/data/23.jpg","http://localhost:9090/data/24.jpg",
+			"http://localhost:9090/data/25.jpg","http://localhost:9090/data/26.jpg","http://localhost:9090/data/27.jpg","http://localhost:9090/data/28.jpg"};
 	
 	int total;
 	int order_number=1;
@@ -98,7 +105,11 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 	HBox mediaBar;
 	
 	int count =0;
-
+	
+	//음료 이미지로 받아오기위해서 이미지들 담기
+	String[] img_array={};
+	
+	
 	public OrderMain(PosWindow posWindow) {
 		
 		for(int i=0;i<url.length;i++){
@@ -467,20 +478,64 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 	
 	public void ShowMenu(JButton obj){
 		p_subMenu.removeAll();
+		ArrayList<String> list  =new ArrayList<String>();
+		
 		for(int i=0;i<bigMenu.size();i++){
 			if(obj.getText().equals(bigMenu.get(i).getProduct_category_name())){
 				int id=bigMenu.get(i).getProduct_category_id();
 				for(int a=0;a<product_list.size();a++){
 					if(id==product_list.get(a).getProduct_category_id()){
-						JButton bt=new JButton(product_list.get(a).getProduct_name());
+						JButton bt=null;
+						try {
+							if(obj.getText().equals("coffee")){
+								System.out.println("커피");
+								ImageIcon icon= new ImageIcon(new URL(coffee[a]));
+							 bt= new JButton(icon);
+						}else if(obj.getText().equals("drink")){
+							System.out.println("e");
+							ImageIcon icon= new ImageIcon(new URL(drink[a]));
+							 bt = new JButton(icon);
+						}else if(obj.getText().equals("bread")){
+							System.out.println("Q");
+							ImageIcon icon= new ImageIcon(new URL(bread[a]));
+							 bt = new JButton(icon);
+						} }catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						System.out.println("이거누르면 또 생성데");
+
 						bt.addActionListener(this);
 						bt.setBackground(Color.WHITE);
-						bt.setPreferredSize(new Dimension(200, 50));
-						
+						bt.setPreferredSize(new Dimension(200,50));
+
 						p_subMenu.add(bt);
 						p_subMenu.updateUI();
 						
+						
+						
+/*						try {
+							URL url = new URL("http://localhost:9090/data/" + id + ".jpg");
+							image=ImageIO.read(url);
+						} catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						can=new Canvas() {
+							public void paint(Graphics g) {
+								g.drawImage(image, 0, 0, 70,70,this);
+							}
+							
+						};
+						can.setPreferredSize(new Dimension(70, 70));
+						p_subMenu.add(can);
+						p_subMenu.updateUI();*/
+						
+		
 					}
 				}
 			}
