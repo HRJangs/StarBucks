@@ -3,10 +3,10 @@
 package order.main;
 
 import java.net.URL;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 
 public class MusicThread extends Thread{
 	Media hit;
