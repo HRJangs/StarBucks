@@ -118,12 +118,13 @@ public class ClientOrders extends JPanel implements ActionListener {
 
 		// 주문하기를 눌렀을경우,
 		if (obj == bt_orders_send) {
-			JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE);
+			/*JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);*/
 
+			OrdersPay pay = new OrdersPay(main, orders_list);
 			// 라벨에 더해진 것들의 product를 가져와야한다.
-			ClientThread thread = new ClientThread(main, orders_list);
-			thread.start();
+			/*ClientThread thread = new ClientThread(main, orders_list);
+			thread.start();*/
 
 		} else if (obj == bt_orders_delete) {
 

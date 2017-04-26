@@ -7,6 +7,7 @@ public class Card {
 	private String card_username;
 	private String card_valid;
 	private String card_companyname;
+	private String card_password;
 	
 	public int getCard_id() {
 		return card_id;
@@ -44,7 +45,12 @@ public class Card {
 	public void setCard_companyname(String card_companyname) {
 		this.card_companyname = card_companyname;
 	}
-	
+	public String getCard_password() {
+		return card_password;
+	}
+	public void setCard_password(String card_password) {
+		this.card_password = card_password;
+	}
 	
 
 }

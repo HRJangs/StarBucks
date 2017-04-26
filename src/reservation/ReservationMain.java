@@ -66,12 +66,7 @@ public class ReservationMain extends JFrame implements ActionListener, ItemListe
 	};
 	
 	//본인의 예약 현황 배열
-	int[][] currentMonth = {
-			{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
-			{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, 
-			{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, 
-			{0, 0}
-			}; 
+	int[] currentMonth = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; 
 	
 	public ReservationMain(Member dto) {
 		this.dto=dto;
@@ -168,8 +163,7 @@ public class ReservationMain extends JFrame implements ActionListener, ItemListe
 		public void query(){
 			//rs일때만 0으로 만들면 안되니깐~~!! 여기서 초기화를 한번 해줘라~!
 			for(int j=0; j<31;j++){
-				currentMonth[j][0] = 0;
-				currentMonth[j][1] = 0;
+				currentMonth[j] = 0;
 				
 				for(int i=0;i<8;i++){
 					reservationStatus[j][i]=0; //아니면 0으로 다시 돌려놔야되~
@@ -204,18 +198,7 @@ public class ReservationMain extends JFrame implements ActionListener, ItemListe
 				for(int i = 0; i < reservationStatus.length; i++) {
 					for (int j = 0; j < reservationStatus[i].length; j++) {
 						if(reservationStatus[i][j] == 2) {
-							currentMonth[i][0]++;
-							
-						/*	if(j == 0) {
-								for(int a = 2; a < reservationStatus[i].length; a++) {
-									if(reservationStatus[i][a] == 2){
-										
-									}
-								}
-							} else if(j < reservationStatus.length - 2) {
-								
-							}*/
-							
+							currentMonth[i]++;
 						}
 					}
 					System.out.println(i + " : " + currentMonth[i]);

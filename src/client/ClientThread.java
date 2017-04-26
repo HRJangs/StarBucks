@@ -19,6 +19,7 @@ public class ClientThread extends Thread{
 	ClientMain main;
 	Vector<Product> product;
 	String msg;
+	OrdersPay pmain;
 	
 	//소켓 접속 관련
 		Socket socket;
@@ -27,9 +28,10 @@ public class ClientThread extends Thread{
 		BufferedReader buffr;
 		BufferedWriter buffw;
 	
-	public ClientThread(ClientMain main, Vector<Product> product) {
+	public ClientThread(ClientMain main, Vector<Product> product, OrdersPay pmain) {
 		this.main = main;
 		this.product = product;
+		this.pmain = pmain;
 		
 		//소켓 꼽기
 		try {
@@ -57,6 +59,7 @@ public class ClientThread extends Thread{
 			
 			if(data.equals("주문완료")){
 				main.orders.p_center.removeAll();
+				pmain.dispose();
 				JLabel la = new JLabel("주문완료! 창구를 확인해주세요");
 				la.setFont(new Font("돋움", Font.BOLD, 30));
 				main.orders.p_center.add(la);
