@@ -13,13 +13,12 @@ public class CreateLargeCan extends Canvas{
 		this.img = img;
 		this.main = main;
 		
-		this.setPreferredSize(new Dimension(400, 400));
-		
-		this.paint(main.getGraphics());
+		this.setPreferredSize(new Dimension(500, 450));
+//		this.paint(main.getGraphics());
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(img, 0, 100, 400, 400, main);
+		g.drawImage(img, 0, 0, 500, 450, main.p_south_center);
 	}
 
 }

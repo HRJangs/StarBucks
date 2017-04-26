@@ -1,12 +1,12 @@
 package pos;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.event.TableModelEvent;
@@ -17,7 +17,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 
 import db.DBManager;
 
@@ -28,19 +27,53 @@ public class DataController{
 	Vector<Vector> data = new Vector<Vector>();
 	Vector<String> columnName = new Vector<String>();
 	InsertFrame insertFrame;
+	InsertCoupon insertCoupon;
 	//InsertMenu insertMenu;
 	MyPanel myPanel;
-	
+	ArrayList<String> menu= new ArrayList<String>();
+	ArrayList<ArrayList> coupon= new ArrayList<ArrayList>();
 	
 	public DataController(MyPanel mypanel) {
 		manager = DBManager.getInstance();
 		this.con =manager.getConnection();
 		this.myPanel =mypanel;
+		getMenu();
 	}
 	public AbstractTableModel getDataModel(){
 		DataModel  model = new DataModel(data, columnName);
 		return model;
 	}
+	
+	public void getMenu(){
+		String sql ="select product_name from product";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt =con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				menu.add(rs.getString(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}if(pstmt!=null){
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}if(rs!=null){
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void getList(String table_Name){
 		data.removeAll(data);
 		String sql = "select * from "+table_Name;
@@ -396,5 +429,99 @@ public class DataController{
 		}
 		ChartPanel chartPanel = new ChartPanel(chart);
 		return chartPanel;
+	}
+	
+	
+	public void createCoupon(InsertCoupon insertCoupon){
+		data.removeAll(data);
+		coupon.removeAll(coupon);
+		this.insertCoupon=insertCoupon;
+		String sql = "insert into coupon(product_id,coupon_number,coupon_status) values(?,?,?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt =  con.prepareStatement(sql);
+			pstmt.setString(1,Integer.toString(insertCoupon.choice.getSelectedIndex()+1));
+			pstmt.setString(2, insertCoupon.t_num.getText());
+			pstmt.setString(3, "create");
+			System.out.println("여기서부터");
+			System.out.println(insertCoupon.choice.getSelectedIndex());
+			System.out.println(insertCoupon.t_num.getText());
+			System.out.println("여기");
+			pstmt.executeUpdate();
+			getList("coupon");
+			myPanel.table.updateUI();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt!=null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void getCoupon(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("select p.product_name, c.coupon_number ");
+		sb.append(" from product p inner join coupon c on c.product_id=p.product_id");
+		sb.append(" and  c.coupon_status='create'");
+	
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt =con.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ArrayList list = new ArrayList();
+				list.add(rs.getString(1));
+				list.add(rs.getString(2));
+				coupon.add(list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}if(pstmt!=null){
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}if(rs!=null){
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void authorizeCoupon(String id,String coupon){
+		data.removeAll(data);
+		String sql ="update member set member_coupon = ? where member_login_id=?";
+		String sql2 ="update coupon set coupon_status =? where coupon_number=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		ArrayList<String> list2 =new ArrayList<String>();
+		try {
+			pstmt =con.prepareStatement(sql);
+			pstmt.setString(1, coupon);
+			pstmt.setString(2, id);
+			int result =pstmt.executeUpdate();
+			pstmt =con.prepareStatement(sql2);
+			pstmt.setString(1, "issued");
+			pstmt.setString(2, coupon);
+			int result2 =pstmt.executeUpdate();
+			if(result==1&&result2==1){
+				System.out.println("쿠폰발행완료,수정완료");
+			}
+			getList("member");
+			myPanel.table.updateUI();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
