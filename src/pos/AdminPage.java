@@ -62,10 +62,11 @@ public class AdminPage extends JPanel{
 		tabbedPane.addTab("레시피관리",new RecipePanel());
 		tabbedPane.addTab("공지사항관리",new BoardPanel(posWindow));
 		//tabbedPane.add("예약관리",new ReservationPanel(new Member()));
+		tabbedPane.addTab("쿠폰관리", new CouponPanel());
 		add(tabbedPane);
 		
 		can.setPreferredSize(new Dimension(800, 600));
-		setBackground(Color.black);
+		setBackground(Color.white);
 		setVisible(true);
 		setSize(800,800);
 	}
