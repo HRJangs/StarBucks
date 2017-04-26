@@ -86,9 +86,9 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 
 		// can_center.setPreferredSize(new Dimension(135, 135));
 
-		t_id = new JTextField("ID입력", 20);
+		t_id = new JTextField("jangs", 20);
 		t_id.setPreferredSize(new Dimension(380, 35));
-		t_pw = new JPasswordField("PW입력", 20);
+		t_pw = new JPasswordField("1234", 20);
 		t_pw.setEchoChar((char) 0);
 		t_pw.setPreferredSize(new Dimension(380, 35));
 

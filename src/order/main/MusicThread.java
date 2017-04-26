@@ -1,48 +1,52 @@
+//음악이 재생되고있음
+
 package order.main;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-
-/*import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;*/
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 public class MusicThread extends Thread{
+	Media hit;
+	MediaPlayer mediaPlayer;
+	URL[] url;
+	int i=0;
+	
+	
+	public MusicThread(URL[] url) {
+		this.url = url;
+	}
+	
+	public void next(int num) {
+		this.i=num;
+		
+		hit = new Media(url[i].toString());
+		mediaPlayer=new MediaPlayer(hit);
+		run();
+		while(mediaPlayer==null){
+		
+			mediaPlayer.stop();
+			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			mediaPlayer.play();
+		}	
+		
+	}
+	
 
 	public void run() {
-/*
-		URL url;
-		try {
-			url = new URL("http://localhost:9090/data/jazz.mp3");
-			Media hit;
-			hit = new Media(url.toString());
-			MediaPlayer mediaPlayer=new MediaPlayer(hit);
-			mediaPlayer.play();
-			final JFXPanel fxPanel = new JFXPanel();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		
-		
-		/*		while(true){
-			System.out.println("음악재생");
-			FileInputStream fis=null;
-			String fileLocation="http://localhost:9090/data/jazz.mp3";
-			
-			try {
-				fis=new FileInputStream(new File(fileLocation));
-				AdvancedPlayer player=new AdvancedPlayer(fis);
-				player.play();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (JavaLayerException e) {
-				e.printStackTrace();
+		if(i==0){
+			hit = new Media(url[i].toString());
+			mediaPlayer=new MediaPlayer(hit);
+	
+				
 			}
-		
-		}*/
-
+		mediaPlayer.play();
+		final JFXPanel fxPanel = new JFXPanel();	
 	}
+
 }
+	
+	
+
