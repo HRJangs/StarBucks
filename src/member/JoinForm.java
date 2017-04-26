@@ -383,8 +383,8 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 	}
 
 	public void id_over_ck() {
-		boolean flag = true; //db에 중복된 아이디가 있을때
-		boolean flag2 = true; //id_t에 값일 있을때
+		boolean flag = true; // db에 중복된 아이디가 있을때
+		boolean flag2 = true; // id_t에 값일 있을때
 
 		ArrayList<String> list = new ArrayList<String>();
 		String sql = "select member_login_id from member";
@@ -403,19 +403,20 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 			String id = id_t.getText();
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i));
-				if (list.get(i).equals(id)) { //중복된 아이디가 있을때
+				if (list.get(i).equals(id)) { // 중복된 아이디가 있을때
 					flag = false;
-					check=2;
-				} else if (id.equals("아이디를 입력하세요.")) { //아이디를 입력하지 않았을때
+					check = 2;
+				} else if (id.equals("아이디를 입력하세요.") || id.equals("")) {
+					// 아이디를 입력하지 않았을때
 					flag2 = false;
 				}
 			}
-			if (flag == false && flag2 == true) { //아이디를 입력했는데 중복된 아이디가 있을때
+			if (flag == false && flag2 == true) { // 아이디를 입력했는데 중복된 아이디가 있을때
 				JOptionPane.showMessageDialog(this, "중복된 아이디가 존재 합니다.");
-			} else if (flag == true && flag2 == true) {//중복된 아이디가 없고 아이디도 입력했을때
-				check=1;
+			} else if (flag == true && flag2 == true) {// 중복된 아이디가 없고 아이디도 입력했을때
+				check = 1;
 				JOptionPane.showMessageDialog(this, "사용 가능한 아이디입니다.");
-			} else if (flag2 == false) {	//아이디 입력하지 않고 중복체크버튼 눌렀을때
+			} else if (flag2 == false) { // 아이디 입력하지 않고 중복체크버튼 눌렀을때
 				JOptionPane.showMessageDialog(this, "아이디를 입력해주세요.");
 			}
 
@@ -529,6 +530,7 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 				trans();
 		} else if (obj == bt_cancel) {
 			cancel();
+			memberWindow.setPage(0);
 		} else if (obj == id_bt) {
 			id_over_ck();
 		}

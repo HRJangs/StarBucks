@@ -39,7 +39,7 @@ public class ClientOrders extends JPanel implements ActionListener {
 
 		scroll.setPreferredSize(new Dimension(300 * 2, 400));
 		scroll2.setPreferredSize(new Dimension(300 * 2, 200));
-		p_center.setPreferredSize(new Dimension(580, main.product_list.size() * 30));
+		p_center.setPreferredSize(new Dimension(580, main.product_list.size() * 40));
 		p_south.setPreferredSize(new Dimension(300 * 2, 50 * 2));
 		p_sum.setPreferredSize(new Dimension(300 * 2, 50));
 		p_north.setPreferredSize(new Dimension(580, main.product_list.size() * 90));
