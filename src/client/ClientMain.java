@@ -199,7 +199,6 @@ public class ClientMain extends JPanel implements ActionListener {
 
 		String sql = "select * from member where member_login_id='" + login_id + "'";
 
-		System.out.println(sql);
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -315,7 +314,6 @@ public class ClientMain extends JPanel implements ActionListener {
 			p_page.add(pageList[i]);
 			pageList[i].setVisible(false);
 		}
-
 	}
 
 	public void setPage(int num) {
@@ -325,5 +323,4 @@ public class ClientMain extends JPanel implements ActionListener {
 		pageList[num].setVisible(true);
 
 	}
-
 }
