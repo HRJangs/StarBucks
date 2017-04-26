@@ -28,7 +28,9 @@ public class DataController{
 	Vector<Vector> data = new Vector<Vector>();
 	Vector<String> columnName = new Vector<String>();
 	InsertFrame insertFrame;
+	//InsertMenu insertMenu;
 	MyPanel myPanel;
+	
 	
 	public DataController(MyPanel mypanel) {
 		manager = DBManager.getInstance();
@@ -40,6 +42,7 @@ public class DataController{
 		return model;
 	}
 	public void getList(String table_Name){
+		data.removeAll(data);
 		String sql = "select * from "+table_Name;
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
@@ -75,6 +78,44 @@ public class DataController{
 			}
 		}
 	}
+	public void productList(){
+		String sql = "select p.product_name ,r.milk, r.coffee,r.honeybread,r.muffin,r.cake,r.apple,r.orange ,r.caramel,r.chocopowder,r.whitechocopowder,r.mango,r.grape,r.blueberry,r.tomato,r.hanrabong,r.bagle,r.scone,r.roll,r.danish,r.twist,r.triple_bean  from product p INNER JOIN recipe r on p.product_id = r.product_id  group by p.product_id";
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		try {
+			pstmt =  con.prepareStatement(sql);
+			rs =pstmt.executeQuery();
+			ResultSetMetaData meta = rs.getMetaData();
+			for(int i=1;i<=meta.getColumnCount();i++){
+				columnName.add(meta.getColumnName(i));
+			}
+			while(rs.next()){
+				Vector vec = new Vector();
+				for(int i=0;i<meta.getColumnCount();i++){
+					vec.add(rs.getString(i+1));
+				}
+				data.add(vec);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(pstmt!=null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
 	public void addEmp(InsertFrame insertFrame){
 		this.insertFrame = insertFrame;
 		data.removeAll(data);
@@ -89,12 +130,6 @@ public class DataController{
 			pstmt = con.prepareStatement(sql.toString());
 			int row =data.size();
 			System.out.println(row);
-			//System.out.println(myPanel.table.getValueAt(1, 1));
-			//for(int i=0;i<row;i++){
-				//if(insertFrame.t_id.getText().equals(myPanel.table.getValueAt(i, 1))){
-					//JOptionPane.showMessageDialog(myPanel, "중복된 아이디입니다.");
-				//}
-		//	}
 			pstmt.setString(1,insertFrame.t_id.getText() );
 			pstmt.setString(2,insertFrame.t_pw.getText() );
 			pstmt.setString(3,insertFrame.t_name.getText() );
@@ -124,6 +159,51 @@ public class DataController{
 			}
 		}
 	}
+	/*public void addMenu(InsertMenu insertMenu){
+		this.insertMenu = insertMenu;
+		data.removeAll(data);
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into product(emp_login_id,emp_login_pw,emp_name,emp_phone,emp_job,emp_sal)");
+		sql.append("values(?,?,?,?,?,?)");
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		String phone=insertFrame.choice.getSelectedItem()+"-"+insertFrame.t_phone1.getText()+"-"+insertFrame.t_phone2.getText();
+		
+		try {
+			pstmt = con.prepareStatement(sql.toString());
+			int row =data.size();
+			System.out.println(row);
+			pstmt.setString(1,insertFrame.t_id.getText() );
+			pstmt.setString(2,insertFrame.t_pw.getText() );
+			pstmt.setString(3,insertFrame.t_name.getText() );
+			pstmt.setString(4,phone);
+			pstmt.setString(5,insertFrame.choice_job.getSelectedItem() );
+			pstmt.setString(6,insertFrame.t_sal.getText() );
+			rs = pstmt.executeQuery();
+			System.out.println("여기까지오니?");
+			getList("recipe");
+			myPanel.table.updateUI();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(pstmt!=null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	*/
+	
 	public void SearchEmp(){
 		String str ="";
 		System.out.println(myPanel.choice.getSelectedItem());
@@ -189,7 +269,7 @@ public class DataController{
 				vec.add(rs.getString(7));
 				vec.add(rs.getString(8));
 				vec.add(rs.getString(9));
-				
+				vec.add(rs.getString(10));
 				data.add(vec);
 			}
 			myPanel.table.setModel(getDataModel());

@@ -46,49 +46,57 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 	JPasswordField t_pw;
 	JButton bt_login;
 	Canvas can_center;
+	Canvas can_north;
 	BufferedImage image = null;
-
+	BufferedImage image2 = null;
 	public LoginForm(PosWindow posWindow) {
 		this.posWindow = posWindow;
 		container = new JPanel();
 
 		// north
 		p_north = new JPanel();
-		p_north.setBackground(Color.BLACK);
-		la_north = new JLabel("로그인");
-		la_north.setForeground(Color.WHITE);
+		p_north.setBackground(Color.white);
+		la_north = new JLabel("직원 로그인");
+		la_north.setForeground(Color.black);
 
 		// center
 		p_center = new JPanel();
 		p_center.setBackground(Color.WHITE);
-		la_center1 = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
-		la_center1.setForeground(new Color(156, 136, 86));
-		la_center1.setFont(new Font("돋움", Font.BOLD, 20));
+		//la_center1 = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
+		//la_center1.setForeground(new Color(156, 136, 86));
+		//la_center1.setFont(new Font("돋움", Font.BOLD, 20));
 
-		la_center2 = new JLabel("<html>직원아이디로 로그인 해주세요<html>",
-				JLabel.CENTER);
-		la_center2.setFont(new Font("돋움", Font.PLAIN, 13));
+		//la_center2 = new JLabel("<html>직원아이디로 로그인 해주세요<html>",
+			//	JLabel.CENTER);
+		//la_center2.setFont(new Font("돋움", Font.PLAIN, 13));
 		
 		// 이미지 url 얻어오기
 		try {
-			URL url = new URL("http://localhost:9090/data/main_login_cup01_img.png");
+			URL url = new URL("http://localhost:9090/data/pos_login.jpg");
 			image = ImageIO.read(url);
+			URL url2 = new URL("http://localhost:9090/data/pos_logo.PNG");
+			image2 = ImageIO.read(url2);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		can_north = new Canvas(){
+			public void paint(Graphics g) {
+				g.drawImage((Image) image2, 0, 0,400, 50, this);
 
+			}
+		};
 		can_center = new Canvas() {
 			public void paint(Graphics g) {
-				g.drawImage((Image) image, 178, 0, 42, 90, this);
+				g.drawImage((Image) image, 0, 0,400, 300, this);
 
 			}
 		};
 
 		// can_center.setPreferredSize(new Dimension(135, 135));
 
-		t_id = new JTextField("jangs", 20);
+		t_id = new JTextField("ID입력", 20);
 		t_id.setPreferredSize(new Dimension(380, 35));
-		t_pw = new JPasswordField("1234", 20);
+		t_pw = new JPasswordField("PW입력", 20);
 		t_pw.setEchoChar((char) 0);
 		t_pw.setPreferredSize(new Dimension(380, 35));
 
@@ -103,11 +111,11 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 	
 
 		// add
-		p_north.add(la_north);
-
+		p_north.add(can_north);
+		
 		p_center.add(can_center);
-		p_center.add(la_center1);
-		p_center.add(la_center2);
+		//p_center.add(la_center1);
+		//p_center.add(la_center2);
 		p_center.add(t_id);
 		p_center.add(t_pw);
 
@@ -130,9 +138,10 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 		la_north.setBounds(10, 0, 100, 55);
 
 		p_center.setLayout(null);
-		can_center.setBounds(0, 55, 400, 150);
-		la_center1.setBounds(0, 200, 400, 30);
-		la_center2.setBounds(0, 240, 400, 50);
+		can_center.setBounds(0, 0, 400, 300);
+		can_north.setBounds(0, 0, 400, 50);
+		//la_center1.setBounds(0, 200, 400, 30);
+		//la_center2.setBounds(0, 240, 400, 50);
 		t_id.setBounds(10, 340, 380, 40);
 		t_pw.setBounds(10, 390, 380, 40);
 
@@ -144,7 +153,7 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 		bt_login.addActionListener(this);
 	
 
-		setPreferredSize(new Dimension(400, 650));
+		setPreferredSize(new Dimension(400, 600));
 
 		// 이벤트 연결
 
