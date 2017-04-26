@@ -3,6 +3,8 @@ package order.main;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,6 +14,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,17 +42,15 @@ import dto.Emp;
 import dto.Orders;
 import dto.Product;
 import dto.Product_category;
-import javafx.beans.property.BooleanProperty;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 import order.payment.Payment;
 import pos.login.PosWindow;
 
-public class OrderMain extends JPanel implements ActionListener,Runnable{
+public class OrderMain extends JPanel implements ActionListener,Runnable, ItemListener{
 	Connection con;
 	DBManager manager;
 	Thread thread;
@@ -56,7 +58,13 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 	//	p_east 전체화면 동쪽, p_west 전체화면 서쪽 p_product 주문한거뜨는 곳,p_topMenu메뉴 상위 버튼들 있는곳 p_subMenu메뉴 하위버튼들 p_pay 결제하기버튼 있는 곳 
 
 	JPanel p_pos,p_product,p_component,p_topMenu,p_subMenu, p_sum,p_pay , p_east, p_west ,p_date,p_music ,p_etc ,p_con ,p_list;
-	JButton bt_pay, bt_allDelete,bt_stop,bt_play, bt_list, bt_prev, bt_next,bt_reservation, bt_reservation_show ,bt_income , bt_stock ;
+	JButton bt_pay, bt_allDelete,bt_stop,bt_play, bt_prev, bt_next,bt_reservation, bt_reservation_show ,bt_income , bt_stock;
+	
+	CheckboxGroup group = new CheckboxGroup();
+	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
+	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
+	
+	
 	JScrollPane scroll;
 	
 	Canvas can;
@@ -68,13 +76,28 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 	Vector<ProductPanel> menu_list=new Vector<ProductPanel>();
 	Vector<Orders> orders_list=new Vector<Orders>();
 	PosWindow posWindow;
+	
+	
 	int total;
 	int order_number=1;
 	JButton obj;
 	
 	Emp emp;
+	
+	//음악관련
 	URL[] url = new URL[4];
 	int num;
+	boolean repeat_one_flag=false;
+	boolean repeat_all_flag=true;
+	
+	
+	//Label timeLabel=new Label("Time:  ");
+	
+	Slider timeSlider;
+	Slider volumnSlider;
+	HBox mediaBar;
+	
+	int count =0;
 
 	public OrderMain(PosWindow posWindow) {
 		
@@ -86,6 +109,8 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 				e.printStackTrace();
 			}
 		}
+		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
+		//mediaBar.getChildren().add(timeLabel);
 		
 		this.posWindow =posWindow;
 		p_date=new JPanel();
@@ -114,14 +139,13 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		bt_allDelete.setPreferredSize(new Dimension(150, 50));
 		bt_pay.setPreferredSize(new Dimension(150, 50));
 		
-		bt_list=new JButton("목록");
+		
 		bt_next=new JButton("▶▶");
 		bt_prev=new JButton("◀◀");
 		bt_play=new JButton("▶");
 		bt_stop=new JButton("||");
 		
-		bt_list.setBackground(Color.WHITE);
-		bt_list.setPreferredSize(new Dimension(70, 50));
+		
 		bt_next.setBackground(Color.WHITE);
 		bt_next.setPreferredSize(new Dimension(70,50));
 		bt_prev.setBackground(Color.WHITE);
@@ -208,7 +232,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		p_east.add(p_topMenu);
 		p_east.add(p_subMenu);
 		p_east.add(p_etc);
-	
+		//p_etc.add(mediaBar);
 		p_east.add(p_con);
 		
 		p_con.setLayout(new GridLayout(1,2));
@@ -223,8 +247,14 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		p_music.add(bt_stop);
 		p_music.add(bt_play);
 		p_music.add(bt_next);
-		p_music.add(bt_list);
-		//add(p_east,BorderLayout.EAST);
+		
+		p_music.add(cb_repeat_one);
+		p_music.add(cb_repeat_all);
+		
+		cb_repeat_one.addItemListener(this);
+		cb_repeat_all.addItemListener(this);
+		
+		
 		
 		
 		
@@ -232,7 +262,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		bt_pay.addActionListener(this);
 		bt_play.addActionListener(this);
 		bt_stop.addActionListener(this);
-		bt_list.addActionListener(this);
+		
 		bt_next.addActionListener(this);
 		bt_prev.addActionListener(this);
 		
@@ -396,9 +426,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 			
 			}else if(obj==bt_next){
 				nextMusic();
-				
-			}else if(obj==bt_list){//MP3 목록
-				//getList();
+			
 			}else if(obj==bt_prev){//이전 곡
 				prevMusic();
 				
@@ -413,6 +441,10 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 				}
 			}
 		}
+	
+
+	
+	
 
 
 	//배열에 아메리카노 올리라고!!!!!!!!!!!!!!!!!! 
@@ -460,6 +492,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		int ans=JOptionPane.showConfirmDialog(this, "전체삭제?");
 		if(ans==JOptionPane.OK_OPTION){
 			total=0;
+			
 			menu_list.removeAll(menu_list);
 			p_component.removeAll();
 			p_component.updateUI();
@@ -528,25 +561,72 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 	
+	
+	public void itemStateChanged(ItemEvent e) {
+		if(cb_repeat_one.getState()){
+			repeat_all_flag=false;
+			repeat_one_flag=true;
+			System.out.println("원");
+		}else if(cb_repeat_all.getState()){
+			repeat_all_flag=true;
+			repeat_one_flag=false;
+			System.out.println("올");
+		}	
+	}
+	
+	/*---------------------------
+				음악부분
+	----------------------------*/
+	
+	
+	//체크박스 반복여부에 따라서 다르게 행동하게 해보자~!
+	public void repeat_one(){
+		music.mediaPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				music.mediaPlayer.stop();
+				System.out.println("끝났어? 1?");
+				musicStart();
+				System.out.println("1!");
+				return;
+			}
+		});
+	}
+	
+	public void repeat_all(){
+		music.mediaPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				System.out.println("올?");
+	            nextMusic();
+	            System.out.println("올!");
+	            return;
+			}
+		});
+	}
+	
+	//음악
 	public void musicStart(){
+		
 		System.out.println("재생");
 		if(music==null){
-			music=new MusicThread(url);
-			music.run();
+			music=new MusicThread(url);			
+			music.run();			
 		}else{
-			
+			music.mediaPlayer.setStartTime(music.mediaPlayer.getStartTime());
+			System.out.println("여기있니?");
 			music.mediaPlayer.play();
-			
+			count++;
+		}	
+		if(repeat_all_flag&&!repeat_one_flag){//전곡반복이라면,
+			repeat_all();
+		}else {//한곡반복이라면,
+			repeat_one();
 		}
-		
-		System.out.println(url.length);
-		
+		System.out.println(count);
 	}
 	
 	
@@ -566,6 +646,11 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		num++;
 		music.next(num);
 		
+		if(repeat_all_flag&&!repeat_one_flag){//전곡반복이라면,
+			repeat_all();
+		}else{//한곡반복이라면,
+			repeat_one();
+		}
 		
 	}
 	
@@ -577,27 +662,24 @@ public class OrderMain extends JPanel implements ActionListener,Runnable{
 		}
 		num--;
 		music.next(num);
+		
+		if(repeat_all_flag&&!repeat_one_flag){//전곡반복이라면,
+			repeat_all();
+		}else {//한곡반복이라면,
+			repeat_one();
+		}
 	}
+	
+	//목록가져오기
 	public void getList(){
 		FileChooser chooser=new FileChooser();
 		chooser.getExtensionFilters().add(new ExtensionFilter("*.mp3"));
 		File file=chooser.showOpenDialog(null);
 		String path= file.getAbsolutePath();
 		path=path.replace("\\", "/");
-		
-		Media media;
-		try {
-			media = new Media(new File(path).toURL().toString());
-			MediaPlayer mp=new MediaPlayer(media);
-			mp.setAutoPlay(true);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		//media
+
 		
 	}
 	
-
 }

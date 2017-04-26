@@ -13,10 +13,12 @@ public class ServerMain {
 			server = new ServerSocket(port);
 			System.out.println("서버생성");
 
-			Socket socket = server.accept();
-			System.out.println("접속자 캐치");
-			ServerThread thread = new ServerThread(socket);
-			thread.start();
+			while(true) {
+				Socket socket = server.accept();
+				System.out.println("접속자 캐치");
+				ServerThread thread = new ServerThread(socket);
+				thread.start();
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
