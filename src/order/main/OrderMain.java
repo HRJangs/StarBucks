@@ -68,17 +68,8 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	CheckboxGroup group = new CheckboxGroup();
 	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
 	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
-<<<<<<< HEAD
-
-	
-	
 	JScrollPane scroll_menu, scroll_bt;
 
-=======
-
-	JScrollPane scroll_menu, scroll_bt;
-
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 	Canvas can;
 	BufferedImage image = null;
 
@@ -91,7 +82,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
 
-<<<<<<< HEAD
 	String[] coffee = {"http://211.238.142.120:9090/data/Pos/1.jpg","http://211.238.142.120:9090/data/Pos/2.jpg",
 			"http://211.238.142.120:9090/data/Pos/8.jpg","http://211.238.142.120:9090/data/Pos/9.jpg","http://211.238.142.120:9090/data/Pos/10.jpg",
 			"http://211.238.142.120:9090/data/Pos/11.jpg","http://211.238.142.120:9090/data/Pos/12.jpg",
@@ -106,42 +96,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 			"http://211.238.142.120:9090/data/Pos/24.jpg",
 			"http://211.238.142.120:9090/data/Pos/25.jpg","http://211.238.142.120:9090/data/Pos/26.jpg",
 			"http://211.238.142.120:9090/data/Pos/27.jpg","http://211.238.142.120:9090/data/Pos/28.jpg"};
-=======
-<<<<<<< HEAD
-	String[] coffee = { "http://211.238.142.120:9090/data/Pos/1.jpg", "http://211.238.142.120:9090/data/Pos/2.jpg",
-			"http://211.238.142.120:9090/data/Pos/8.jpg", "http://211.238.142.120:9090/data/Pos/9.jpg", "http://211.238.142.120:9090/data/Pos/10.jpg",
-			"http://211.238.142.120:9090/data/Pos/11.jpg", "http://211.238.142.120:9090/data/Pos/12.jpg",
-			"http://211.238.142.120:9090/data/Pos/13.jpg", "http://211.238.142.120:9090/data/Pos/14.jpg",
-			"http://211.238.142.120:9090/data/Pos/15.jpg" };
-	String[] drink = { "http://211.238.142.120:9090/data/Pos/3.jpg", "http://211.238.142.120:9090/data/Pos/4.jpg",
-			"http://211.238.142.120:9090/data/Pos/16.jpg", "http://211.238.142.120:9090/data/Pos/17.jpg",
-			"http://211.238.142.120:9090/data/Pos/18.jpg", "http://211.238.142.120:9090/data/Pos/19.jpg",
-			"http://211.238.142.120:9090/data/Pos/20.jpg", "http://211.238.142.120:9090/data/Pos/21.jpg",
-			"http://211.238.142.120:9090/data/Pos/22.jpg" };
-	String[] bread = { "http://211.238.142.120:9090/data/Pos/5.jpg", "http://211.238.142.120:9090/data/Pos/6.jpg",
-			"http://211.238.142.120:9090/data/Pos/7.jpg", "http://211.238.142.120:9090/data/Pos/23.jpg",
-			"http://211.238.142.120:9090/data/Pos/24.jpg", "http://211.238.142.120:9090/data/Pos/25.jpg",
-			"http://211.238.142.120:9090/data/Pos/26.jpg", "http://211.238.142.120:9090/data/Pos/27.jpg",
-			"http://211.238.142.120:9090/data/Pos/28.jpg" };
 
-=======
-	String[] coffee = {"http://211.238.142.120:9090/data/1.jpg","http://211.238.142.120:9090/data/2.jpg",
-			"http://211.238.142.120:9090/data/8.jpg","http://211.238.142.120:9090/data/9.jpg","http://211.238.142.120:9090/data/10.jpg",
-			"http://211.238.142.120:9090/data/11.jpg","http://211.238.142.120:9090/data/12.jpg",
-			"http://211.238.142.120:9090/data/13.jpg","http://211.238.142.120:9090/data/14.jpg",
-			"http://211.238.142.120:9090/data/15.jpg"};
-	String[] drink = {"http://211.238.142.120:9090/data/3.jpg","http://211.238.142.120:9090/data/4.jpg",
-			"http://211.238.142.120:9090/data/16.jpg","http://211.238.142.120:9090/data/17.jpg","http://211.238.142.120:9090/data/18.jpg"
-			,"http://211.238.142.120:9090/data/19.jpg","http://211.238.142.120:9090/data/20.jpg",
-			"http://211.238.142.120:9090/data/21.jpg","http://211.238.142.120:9090/data/22.jpg"};
-	String[] bread = {"http://211.238.142.120:9090/data/5.jpg","http://211.238.142.120:9090/data/6.jpg",
-			"http://211.238.142.120:9090/data/7.jpg","http://211.238.142.120:9090/data/23.jpg",
-			"http://211.238.142.120:9090/data/24.jpg",
-			"http://211.238.142.120:9090/data/25.jpg","http://211.238.142.120:9090/data/26.jpg",
-			"http://211.238.142.120:9090/data/27.jpg","http://211.238.142.120:9090/data/28.jpg"};
->>>>>>> 50f015a379ede22492bfd6a4fa8799ac1c101f86
-	
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 	int total;
 	int order_number = 1;
 	JButton obj;
@@ -175,10 +130,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				e.printStackTrace();
 			}
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
 		//mediaBar.getChildren().add(timeLabel);
 		
@@ -250,16 +201,11 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		p_music.setPreferredSize(new Dimension(600, 200));
 		
 		p_con.setPreferredSize(new Dimension(800, 200));
-<<<<<<< HEAD
 		p_date.setPreferredSize(new Dimension(200, 200));
 
 		scroll_menu.setPreferredSize(new Dimension(400, 350));
 		//scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
-=======
 
-		scroll_menu.setPreferredSize(new Dimension(400, 350));
-		scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 
 		try {
 			URL image_url = new URL("http://211.238.142.120:9090/data/sb_join.png");
@@ -533,10 +479,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 	public void ShowMenu(JButton obj) {
 		p_subMenu.removeAll();
-<<<<<<< HEAD
-
-=======
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 		ArrayList<String> list  =new ArrayList<String>();
 		int cnt = 0;
 		
@@ -546,10 +488,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				for(int a=0;a<product_list.size();a++){
 					if(id==product_list.get(a).getProduct_category_id()){
 						JButton bt=null;
-<<<<<<< HEAD
 
-=======
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 						try {
 							if (obj.getText().equals("coffee")) {
 								System.out.println("커피");
@@ -568,25 +507,20 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 							e.printStackTrace();
 						}
 						
-<<<<<<< HEAD
 						cnt++;
 						
 						System.out.println("이거누르면 또 생성데");
 
 						bt.setBackground(Color.WHITE);
-=======
 
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 						//bt.setPreferredSize(new Dimension(200,50));
 						bt.setPreferredSize(new Dimension(150,200));
 						bt.addActionListener(this);
 
 						p_subMenu.add(bt);
 						p_subMenu.updateUI();
-<<<<<<< HEAD
-=======
+
 						}
->>>>>>> 2c0491b22bc05548f86a422dcc57a27965041b3c
 
 					}
 				}
