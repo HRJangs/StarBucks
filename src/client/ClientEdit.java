@@ -69,7 +69,7 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 		//cb_phone.addItem(item);
 		
 		try {
-			url = new URL("http://localhost:9090/data/sb_join.png");
+			url = new URL("http://211.238.142.120:9090/data/sb_join.png");
 			img = imageIO.read(url);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();

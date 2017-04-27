@@ -72,6 +72,7 @@ public class CardCompanyMain extends JFrame implements ActionListener {
 
 		setSize(400, 300);
 		setVisible(true);
+		setLocationRelativeTo(main);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 	}

@@ -5,6 +5,7 @@ public class Product {
 	private int product_category_id;
 	private String product_name;
 	private int product_price;
+	private String product_img;
 
 	public int getProduct_id() {
 		return product_id;
@@ -37,5 +38,12 @@ public class Product {
 	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
+	
+	public String getProduct_img() {
+		return product_img;
+	}
 
+	public void setProduct_img(String product_img) {
+		this.product_img = product_img;
+	}
 }

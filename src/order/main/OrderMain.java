@@ -64,9 +64,13 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	CheckboxGroup group = new CheckboxGroup();
 	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
 	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
+<<<<<<< HEAD
 
 	JScrollPane scroll_menu, scroll_bt;
 
+=======
+	JScrollPane scroll_menu, scroll_bt;
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 
 	Canvas can;
 	BufferedImage image = null;
@@ -80,6 +84,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
 
+<<<<<<< HEAD
 	String[] coffee = { "http://211.238.142.120:9090/data/Pos/1.jpg", "http://211.238.142.120:9090/data/Pos/2.jpg",
 			"http://211.238.142.120:9090/data/Pos/8.jpg", "http://211.238.142.120:9090/data/Pos/9.jpg", "http://211.238.142.120:9090/data/Pos/10.jpg",
 			"http://211.238.142.120:9090/data/Pos/11.jpg", "http://211.238.142.120:9090/data/Pos/12.jpg",
@@ -96,6 +101,13 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 			"http://211.238.142.120:9090/data/Pos/26.jpg", "http://211.238.142.120:9090/data/Pos/27.jpg",
 			"http://211.238.142.120:9090/data/Pos/28.jpg" };
 
+=======
+	ArrayList<String> coffee =new ArrayList<String>();
+	ArrayList<String> drink =new ArrayList<String>();
+	ArrayList<String> bread =new ArrayList<String>();
+	
+		
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 	int total;
 	int order_number = 1;
 	JButton obj;
@@ -123,7 +135,13 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				e.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
 
+=======
+		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
+		//mediaBar.getChildren().add(timeLabel);
+		
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 		this.posWindow =posWindow;
 		p_date=new JPanel();
 
@@ -188,12 +206,24 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		p_pay.setPreferredSize(new Dimension(400, 100)); // 결제하기 버튼 있는 패널
 															
 		p_topMenu.setPreferredSize(new Dimension(800, 70));// (상위)커피. 음료. 빵 세개의
+<<<<<<< HEAD
 		p_subMenu.setPreferredSize(new Dimension(800, 650)); // (하위)주문버튼들
 		p_con.setPreferredSize(new Dimension(800, 100));
 
 		
 		scroll_menu.setPreferredSize(new Dimension(400, 450));
 		scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
+=======
+		p_subMenu.setPreferredSize(new Dimension(800, 600)); // (하위)주문버튼들
+		p_music.setPreferredSize(new Dimension(600, 200));
+		
+		p_con.setPreferredSize(new Dimension(800, 200));
+		p_date.setPreferredSize(new Dimension(200, 200));
+
+		scroll_menu.setPreferredSize(new Dimension(400, 350));
+		//scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
+
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 
 		try {
 			URL image_url = new URL("http://211.238.142.120:9090/data/sb_join.png");
@@ -391,9 +421,17 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				dto.setProduct_id(rs.getInt("product_id"));
 				dto.setProduct_name(rs.getString("product_name"));
 				dto.setProduct_price(rs.getInt("product_price"));
-
+				dto.setProduct_img(rs.getString("product_image"));
 				product_list.add(dto);
-
+			}
+			for(int i=0;i<product_list.size();i++){
+				if(product_list.get(i).getProduct_category_id()==1){
+					coffee.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}else if(product_list.get(i).getProduct_category_id()==2){
+					drink.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}else if(product_list.get(i).getProduct_category_id()==3){
+					bread.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -475,7 +513,10 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 	public void ShowMenu(JButton obj) {
 		p_subMenu.removeAll();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 		ArrayList<String> list  =new ArrayList<String>();
 		int cnt = 0;
 		
@@ -489,21 +530,25 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 						try {
 							if (obj.getText().equals("coffee")) {
 								System.out.println("커피");
-								ImageIcon icon= new ImageIcon(new URL(coffee[cnt]));
+								ImageIcon icon= new ImageIcon(new URL(coffee.get(cnt)));
 								bt= new JButton(product_list.get(a).getProduct_name(), icon);
 						}else if(obj.getText().equals("drink")){
 							System.out.println("e");
-							ImageIcon icon= new ImageIcon(new URL(drink[cnt]));
+							ImageIcon icon= new ImageIcon(new URL(drink.get(cnt)));
 							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
 						}else if(obj.getText().equals("bread")){
 							System.out.println("Q");
-							ImageIcon icon= new ImageIcon(new URL(bread[cnt]));
+							ImageIcon icon= new ImageIcon(new URL(bread.get(cnt)));
 							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
 						} }catch (MalformedURLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+<<<<<<< HEAD
 
+=======
+						
+>>>>>>> 03d92c07bd36c18d93d30f3a60c207a510ffe940
 						cnt++;
 						
 						System.out.println("이거누르면 또 생성데");
