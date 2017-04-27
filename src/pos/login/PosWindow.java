@@ -23,7 +23,6 @@ public class PosWindow extends JFrame {
 		page[1] = new JPanel();
 		page[2] = new JPanel();
 		
-
 		add(page[0]);
 		add(page[1]);
 		add(page[2]);

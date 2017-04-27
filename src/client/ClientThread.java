@@ -25,7 +25,7 @@ public class ClientThread extends Thread{
 	//家南 立加 包访
 		Socket socket;
 		int port = 7777;
-		String host = "211.238.142.119";
+		String host = "211.238.142.120";
 		BufferedReader buffr;
 		BufferedWriter buffw;
 	
