@@ -25,13 +25,12 @@ public class RecipePanel extends MyPanel implements ActionListener,TableModelLis
 	JButton bt_excel_download, bt_excel_upload;
 	
 	//이미지 업로드
-	JButton bt_image_upload;
-	JFileChooser chooser;
+	
 	
 	public RecipePanel() {
 		la_name =new JLabel("이름");
 		choice = new Choice();
-		//bt_add= new JButton("메뉴추가");
+		bt_add= new JButton("메뉴추가");
 		dataController = new DataController(this);
 		dataController.productList();
 		//table.getColumn("product_name").setMaxWidth(20);
@@ -39,8 +38,8 @@ public class RecipePanel extends MyPanel implements ActionListener,TableModelLis
 		bt_excel_upload = new JButton("엑셀파일 올리기");
 		
 		//이미지 올리기
-		bt_image_upload = new JButton("이미지 올리기");
-		chooser = new JFileChooser(""); //어딘가로 정해야하는데 걍 둠
+		
+	
 		
 		
 		setLayout(new BorderLayout());
@@ -50,46 +49,30 @@ public class RecipePanel extends MyPanel implements ActionListener,TableModelLis
 		//테이블 초기 설정
 		model =(DataModel) dataController.getDataModel();
 		model.addTableModelListener(this);
-		//p_north.add(bt_add);
+		p_north.add(bt_add);
 		p_south.add(bt_excel_download);
 		p_south.add(bt_excel_upload);
-		
-		
-		p_south.add(bt_image_upload);
-		
-		bt_image_upload.addActionListener(this);
-		
-		
+
+		bt_add.addActionListener(this);
+
+	
+
 		table.setModel(model);
 		
-		//add(p_north,BorderLayout.NORTH);
+		add(p_north,BorderLayout.NORTH);
 		add(scroll);
 		add(p_south,BorderLayout.SOUTH);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(obj==bt_image_upload){
-			imageUpload();
+
+		if(obj==bt_add){
+			new InsertMenu(dataController);
 		}
 	}
 	
-	public void imageUpload(){
-		int result=chooser.showOpenDialog(this);
-		if(result == JFileChooser.APPROVE_OPTION){
-			File file=chooser.getSelectedFile();
-			String fileName = file.getName();
-			
-			try {
-				FileInputStream fis = new FileInputStream(file);
-				PosThread posThread = new PosThread(fis, fileName);
-				posThread.start();
-				JOptionPane.showMessageDialog(this, "성공");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	
 	
 	
 	public void tableChanged(TableModelEvent e) {

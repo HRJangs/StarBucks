@@ -530,7 +530,7 @@ public class DataController{
 	}
 	
 	public void addMenu(Product dto){
-		String sql = "insert into Product(product_category_id,product_name,product_price) values(?,?,?)";
+		String sql = "insert into Product(product_category_id,product_name,product_price,product_image) values(?,?,?,?)";
 		String sql2 = "select Product_id from product where product_name='"+dto.getProduct_name()+"'";
 		String sql3 = "insert into Recipe(product_id) values(?)";
 		PreparedStatement pstmt = null;
@@ -541,6 +541,7 @@ public class DataController{
 			pstmt.setString(1, Integer.toString(dto.getProduct_category_id()));
 			pstmt.setString(2, dto.getProduct_name());
 			pstmt.setString(3, Integer.toString(dto.getProduct_price()));
+			pstmt.setString(4, dto.getProduct_img());
 			int result = pstmt.executeUpdate();
 			//////////////////////////////
 			pstmt= con.prepareStatement(sql2);
