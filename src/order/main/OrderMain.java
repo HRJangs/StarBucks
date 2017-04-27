@@ -68,9 +68,16 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	CheckboxGroup group = new CheckboxGroup();
 	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
 	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
+<<<<<<< HEAD
+	
+	
+	JScrollPane scroll_menu, scroll_bt;
+	
+=======
 
 	JScrollPane scroll;
 
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 	Canvas can;
 	BufferedImage image = null;
 
@@ -131,6 +138,34 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				e.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
+		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
+		//mediaBar.getChildren().add(timeLabel);
+		
+		this.posWindow =posWindow;
+		p_date=new JPanel();
+
+		p_east=new JPanel();
+		p_west=new JPanel();
+		p_pos=new JPanel();
+		p_product=new JPanel();
+		p_component=new JPanel();
+		p_sum=new JPanel();
+		p_pay=new JPanel();
+
+		p_topMenu=new JPanel();
+		p_subMenu=new JPanel(); 
+		p_etc=new JPanel();
+		p_con=new JPanel();
+		p_date=new JPanel();
+		p_music=new JPanel();
+	
+		scroll_menu=new JScrollPane(p_component,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll_bt=new JScrollPane(p_subMenu);
+		
+		bt_allDelete=new JButton("전체삭제");
+		bt_pay=new JButton("결제하기");
+=======
 
 		// timeLabel.setMinWidth(Control.USE_PREF_SIZE);
 		// mediaBar.getChildren().add(timeLabel);
@@ -158,6 +193,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		bt_allDelete = new JButton("전체삭제");
 		bt_pay = new JButton("결제하기");
 
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 		bt_allDelete.setBackground(Color.WHITE);
 		bt_pay.setBackground(Color.WHITE);
 		bt_allDelete.setPreferredSize(new Dimension(150, 50));
@@ -203,7 +239,14 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		p_pay.setPreferredSize(new Dimension(400, 150)); // 결제하기 버튼 있는 패널
 		p_etc.setPreferredSize(new Dimension(800, 80));
 		p_con.setPreferredSize(new Dimension(800, 200));
+<<<<<<< HEAD
+		scroll_menu.setPreferredSize(new Dimension(400, 350));
+		scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
+		
+		
+=======
 
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 		try {
 			URL image_url = new URL("http://211.238.142.120:9090/data/sb_join.png");
 			image = ImageIO.read(image_url);
@@ -474,6 +517,16 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 	public void ShowMenu(JButton obj) {
 		p_subMenu.removeAll();
+<<<<<<< HEAD
+		ArrayList<String> list  =new ArrayList<String>();
+		int cnt = 0;
+		for(int i=0;i<bigMenu.size();i++){
+			if(obj.getText().equals(bigMenu.get(i).getProduct_category_name())){
+				int id=bigMenu.get(i).getProduct_category_id();
+				for(int a=0;a<product_list.size();a++){
+					if(id==product_list.get(a).getProduct_category_id()){
+						JButton bt=null;
+=======
 
 		ArrayList<String> list = new ArrayList<String>();
 
@@ -483,9 +536,29 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				for (int a = 0; a < product_list.size(); a++) {
 					if (id == product_list.get(a).getProduct_category_id()) {
 						JButton bt = null;
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 						try {
 							if (obj.getText().equals("coffee")) {
 								System.out.println("커피");
+<<<<<<< HEAD
+								ImageIcon icon= new ImageIcon(new URL(coffee[cnt]));
+								bt= new JButton(product_list.get(a).getProduct_name(), icon);
+						}else if(obj.getText().equals("drink")){
+							System.out.println("e");
+							ImageIcon icon= new ImageIcon(new URL(drink[cnt]));
+							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
+						}else if(obj.getText().equals("bread")){
+							System.out.println("Q");
+							ImageIcon icon= new ImageIcon(new URL(bread[cnt]));
+							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
+						} }catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						cnt++;
+						
+=======
 								ImageIcon icon = new ImageIcon(new URL(coffee[a]));
 								bt = new JButton(icon);
 							} else if (obj.getText().equals("drink")) {
@@ -502,13 +575,20 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 							e.printStackTrace();
 						}
 
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 						System.out.println("이거누르면 또 생성데");
 
-						bt.addActionListener(this);
 						bt.setBackground(Color.WHITE);
+<<<<<<< HEAD
+						//bt.setPreferredSize(new Dimension(200,50));
+						bt.setPreferredSize(new Dimension(200,200));
+						bt.addActionListener(this);
+						
+=======
 
 						bt.setPreferredSize(new Dimension(200, 50));
 
+>>>>>>> 6d9bebe73a979adab01cc7386414db34e358ea76
 						p_subMenu.add(bt);
 						p_subMenu.updateUI();
 
