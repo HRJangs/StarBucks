@@ -46,6 +46,7 @@ public class IndividualOrder extends JPanel implements ActionListener{
 		la_order_center.setPreferredSize(new Dimension(100, 30));
 		
 		bt_finish.setPreferredSize(new Dimension(100, 30));
+		bt_finish.setBackground(Color.WHITE);
 		
 		add(la_order_west, BorderLayout.WEST);
 		add(la_order_center);

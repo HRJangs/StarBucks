@@ -24,7 +24,7 @@ public class MemberThread extends Thread{
 	Socket socket;
 	int port = 7777;
 	//String host = "127.0.0.1";
-	String host = "211.238.142.117";
+	String host = "211.238.142.120";
 	BufferedReader buffr;
 	BufferedWriter buffw;
 	

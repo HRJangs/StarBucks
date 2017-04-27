@@ -32,13 +32,13 @@ public class ReservationMouseAdapter extends MouseAdapter{
 		status = reservationMain.reservationStatus[date-1][time-10];
 		
 		if((now - 1) < 0) {
-			prevStatus = 0;
+			prevStatus = -1;
 		} else {
 			prevStatus = reservationMain.reservationStatus[date-1][(time-10) - 1];
 		}
 		
 		if((now + 1) > 7) {
-			nextStatus = 0;
+			nextStatus = -1;
 		}
 		else {
 			nextStatus = reservationMain.reservationStatus[date-1][(time-10) + 1];
@@ -50,16 +50,23 @@ public class ReservationMouseAdapter extends MouseAdapter{
 	public void move() {
 		if(status == 0) {
 			if(reservationMain.currentMonth[date - 1] == 1) {
-				
 				new Reserving(reservationMain, date, time, 1);
 			} else if(reservationMain.currentMonth[date - 1] == 0) {
-				new Reserving(reservationMain, date, time, 2);
-			} else {
+				if(nextStatus == 0) {
+					new Reserving(reservationMain, date, time, 2);
+				} else if(nextStatus == 1 || nextStatus == -1) {
+					new Reserving(reservationMain, date, time, 1);
+				} 
+			}  else if(reservationMain.currentMonth[date - 1] == 2){
 				JOptionPane.showMessageDialog(reservationMain, "최대 예약시간은 2시간입니다.");
 			}
 		} else if(status == 2) {
 			if(reservationMain.currentMonth[date - 1] == 1) {
-				new MyReservation(reservationMain, date, time, 2, "insertNext");
+				if(nextStatus == 0) {
+					new MyReservation(reservationMain, date, time, 2, "insertNext");
+				} else if(nextStatus == 1 || nextStatus == -1) {
+					new MyReservation(reservationMain, date, time, 1, "insertNext");
+				}
 			} 
 			else if(reservationMain.currentMonth[date - 1] == 2) {
 				if(prevStatus == 2) {
