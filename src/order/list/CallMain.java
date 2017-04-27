@@ -79,7 +79,7 @@ public class CallMain extends JFrame{
 		} else if(orderList.get(0).getOrders_type().equals("online")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			sql = "select m.member_login_id from member m, orders o where m.member_id = o.orders_client_id and o.orders_client_id = ?";
+			sql = "select m.member_nickname from member m, orders o where m.member_id = o.orders_client_id and o.orders_client_id = ?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -87,15 +87,15 @@ public class CallMain extends JFrame{
 				
 				rs = pstmt.executeQuery();
 				
-				String member_id = null;
+				String member_nickname = null;
 				System.out.println(orderList.get(0).getOrders_client_id());
 				while(rs.next()) {
 					//멤버 로그인 아이디를 받아와서 첫번째 아이디를 받아서 backuplist에 받아두기
-					member_id = rs.getString("m.member_login_id");
+					member_nickname = rs.getString("m.member_nickname");
 				}
 				
-				backupList.add(member_id);
-				System.out.println(member_id);
+				backupList.add(member_nickname);
+				System.out.println(member_nickname);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
