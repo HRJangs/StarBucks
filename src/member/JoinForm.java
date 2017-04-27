@@ -1,7 +1,6 @@
 package member;
 
 import java.awt.Canvas;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -33,6 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import db.DBManager;
+import dto.Member;
 
 public class JoinForm extends JPanel implements ActionListener, FocusListener {
 
@@ -102,7 +102,7 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 		log2 = new JLabel("회원정보를 입력해 주세요.", JLabel.CENTER);
 		// 이미지 url 얻어오기
 		try {
-			URL url = new URL("http://localhost:9090/data/icon_find_sally.png");
+			URL url = new URL("http://211.238.142.120:9090/data/icon_find_sally.png");
 			image = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -158,7 +158,7 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 		p_can2.setBackground(Color.WHITE);
 		// 이미지 url 얻어오기
 		try {
-			URL url = new URL("http://localhost:9090/data/nick.png");
+			URL url = new URL("http://211.238.142.120" + ":9090/data/nick.png");
 			image2 = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();

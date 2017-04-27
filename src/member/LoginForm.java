@@ -72,7 +72,7 @@ public class LoginForm extends JPanel implements ActionListener, FocusListener {
 
 		// 이미지 url 얻어오기
 		try {
-			URL url = new URL("http://localhost:9090/data/main_login_cup01_img.png");
+			URL url = new URL("http://211.238.142.120:9090/data/main_login_cup01_img.png");
 			image = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();

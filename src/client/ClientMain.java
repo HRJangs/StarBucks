@@ -29,10 +29,12 @@ import card.CardListMain;
 import db.DBManager;
 import dto.Member;
 import dto.Product;
+import dto.Product_category;
 import member.MemberWindow;
 import reservation.ReservationMain;
 
 public class ClientMain extends JPanel implements ActionListener {
+
 	// 메인 화면~!
 	JPanel p_page = new JPanel(); // 페이지들 담아둔거
 	JPanel p_main = new JPanel();
@@ -43,17 +45,24 @@ public class ClientMain extends JPanel implements ActionListener {
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
 
 	JPanel[] pageList = new JPanel[7];
-
+	
 	// 이미지
+<<<<<<< HEAD
+	String[] path = { "http://211.238.142.120:9090/data/logo.png", "http://211.238.142.120:9090/data/main_reward_cup_ic.png",
+			"http://211.238.142.120:9090/data/main_card_ic.png", "http://211.238.142.120:9090/data/main_siren_ic.png",
+			"http://211.238.142.120:9090/data/home.png", "http://211.238.142.120:9090/data/map4.png", "http://211.238.142.120:9090/data/reservation.png" };
+=======
 	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
 			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png", "http://localhost:9090/data/reservation.png" };
+			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png",
+			"http://localhost:9090/data/reservation.png" };
+>>>>>>> 5779959e7e4d36871afcbf473110af0d5b2d5b4e
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
 
 	// 클라이언트 화면
 
-	JPanel p_center,p_map;
+	JPanel p_center, p_map;
 	JButton bt_rewards, bt_orders, bt_myPage, bt_event, bt_card;
 
 	// 아예 처음 킬때 회원정보랑 싹 다 가져올거다!
@@ -61,17 +70,20 @@ public class ClientMain extends JPanel implements ActionListener {
 	Connection con;
 	public String login_id;
 	public Member member;
-	Vector<Product> product_list = new Vector<Product>();
+	Vector<Product_category> bigMenu = new Vector<>();// 상위메뉴 커피, 쥬스, 빵
+	Vector<Product> product_list = new Vector<Product>();// product 하위 메뉴들의 정보가
+															// 들어있음
 	ClientOrders orders; // 주문창
+	ClientMenuPanel menupanel;
 
 	public ClientMain(MemberWindow memberWindow) {
-		
+
 		this.login_id = memberWindow.id;
 		this.setLayout(new BorderLayout());
 		p_center = new JPanel();
 		p_map = new JPanel();
 		p_map.setLayout(new BorderLayout());
-		
+
 		// 이미지 url 얻어오기
 		try {
 			for (int i = 0; i < path.length; i++) {
@@ -87,11 +99,11 @@ public class ClientMain extends JPanel implements ActionListener {
 				g.drawImage((Image) image[0], 150, 0, 300, 30, this);
 			}
 		};
-		
+
 		bt_home = new JButton(new ImageIcon(image[4]));
 		bt_map = new JButton(new ImageIcon(image[5]));
 		bt_reserv = new JButton(new ImageIcon(image[6]));
-		
+
 		bt_rewards = new JButton("Rewards", new ImageIcon(image[1]));
 		bt_event = new JButton("Event");
 		bt_myPage = new JButton("My page");
@@ -129,13 +141,13 @@ public class ClientMain extends JPanel implements ActionListener {
 		la_north.setBounds(0, 55, 600, 25);
 
 		add(p_main);
-		p_map.add(bt_reserv,BorderLayout.WEST);
+		p_map.add(bt_reserv, BorderLayout.WEST);
 		p_map.add(bt_home);
-		p_map.add(bt_map,BorderLayout.EAST);
-		
+		p_map.add(bt_map, BorderLayout.EAST);
+
 		add(p_map, BorderLayout.NORTH);
 		add(p_main, BorderLayout.CENTER);
-		
+
 		// 색
 		bt_home.setBackground(Color.BLACK);
 		p_north.setBackground(Color.BLACK);
@@ -154,11 +166,12 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_event.setForeground(Color.WHITE);
 		bt_myPage.setForeground(Color.WHITE);
 		bt_card.setForeground(Color.WHITE);
+
 		bt_map.setForeground(Color.WHITE);
 		bt_reserv.setForeground(Color.WHITE);
-		
+
 		bt_reserv.setBorder(null);
-		
+
 		bt_map.setPreferredSize(new Dimension(45, 25));
 		bt_reserv.setPreferredSize(new Dimension(45, 25));
 		// 이미지내 텍스트 위치
@@ -186,7 +199,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_home.addActionListener(this);
 		bt_map.addActionListener(this);
 		bt_reserv.addActionListener(this);
-		
+
 		// 각종 데이터 다 가져오기(상품, 회원)
 		getData();
 
@@ -194,12 +207,13 @@ public class ClientMain extends JPanel implements ActionListener {
 
 		// 모든 페이지 일단 다 만들기~!
 		init();
+		getMenu();
+		getSubMenu();
 	}
 
 	public void getData() {
 		con = manager.getConnection();
 		getMember();
-		getProduct();
 	}
 
 	public void getMember() {
@@ -207,7 +221,6 @@ public class ClientMain extends JPanel implements ActionListener {
 		ResultSet rs = null;
 
 		String sql = "select * from member where member_login_id='" + login_id + "'";
-
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -248,10 +261,62 @@ public class ClientMain extends JPanel implements ActionListener {
 		}
 	}
 
-	public void getProduct() {
+	// 상위 버튼들 가져오기
+	// DB에서 가져온 버튼들을 다 만들고 누르면 DB길이만큼 버튼들 만들어지게
+	public void getMenu() {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from product";
+		String sql = "select * from product_category order by product_category_id asc";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Product_category vo = new Product_category();
+				vo.setProduct_category_id(rs.getInt("product_category_id"));
+				vo.setProduct_category_name(rs.getString("product_category_name"));
+
+				bigMenu.add(vo);
+				// product_category_name 만큼 버튼 생성
+				JButton bt = new JButton(vo.getProduct_category_name());
+				bt.setBackground(Color.WHITE);
+				bt.setPreferredSize(new Dimension(180, 30));
+				bt.addActionListener(orders);
+				System.out.println(bt.getText());
+				orders.p_category.add(bt);
+				orders.p_category.updateUI();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	// 하위메뉴
+	public void getSubMenu() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from product order by product_id asc";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -259,12 +324,13 @@ public class ClientMain extends JPanel implements ActionListener {
 
 			while (rs.next()) {
 				Product dto = new Product();
-				dto.setProduct_id(rs.getInt(1));
-				dto.setProduct_category_id(rs.getInt(2));
-				dto.setProduct_name(rs.getString(3));
-				dto.setProduct_price(rs.getInt(4));
+				dto.setProduct_category_id(rs.getInt("product_category_id"));
+				dto.setProduct_id(rs.getInt("product_id"));
+				dto.setProduct_name(rs.getString("product_name"));
+				dto.setProduct_price(rs.getInt("product_price"));
 
 				product_list.add(dto);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -300,9 +366,9 @@ public class ClientMain extends JPanel implements ActionListener {
 			setPage(4);
 		} else if (obj == bt_home) {
 			setPage(0);
-		} else if(obj== bt_map){
+		} else if (obj == bt_map) {
 			setPage(5);
-		} else if(obj== bt_reserv){
+		} else if (obj == bt_reserv) {
 			setPage(6);
 		}
 	}
@@ -322,8 +388,8 @@ public class ClientMain extends JPanel implements ActionListener {
 		pageList[4] = card;
 		pageList[5] = map;
 		pageList[6] = reservation;
-		
-		for (int i = 1; i<pageList.length; i++) {
+
+		for (int i = 1; i < pageList.length; i++) {
 			// 넣기
 			p_page.add(pageList[i]);
 			pageList[i].setVisible(false);

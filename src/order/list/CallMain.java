@@ -1,15 +1,16 @@
 package order.list;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ import db.DBManager;
 import dto.Orders;
 
 public class CallMain extends JFrame{
-	DBManager manager;
+	DBManager manager = DBManager.getInstance();
 	Connection con;
 	Vector<String> callList = new Vector<String>(6);
 	JPanel container;
@@ -26,22 +27,26 @@ public class CallMain extends JFrame{
 	JLabel[] label = new JLabel[6];
 	
 	public CallMain() {
+		con = manager.getConnection();
+		
 		container = new JPanel();
+		container.setLayout(new GridLayout(2, 3));
 		
 		for (int i = 0; i < panel.length; i++) {
 			panel[i] = new JPanel();
 			label[i] = new JLabel("");
 			label[i].setFont(new Font("µ¸¿ò", Font.PLAIN, 20));
 			panel[i].add(label[i]);
-			panel[i].setBackground(Color.pink);
+			panel[i].setBackground(Color.LIGHT_GRAY);
 			panel[i].setPreferredSize(new Dimension(100, 100));
 			panel[i].setBounds((i+10)* 100, 0, 100, 100);
+			panel[i].setBorder(BorderFactory.createLineBorder(Color.white));
 			container.add(panel[i]);
 		}
 
 		label[0].setFont(new Font("µ¸¿ò", Font.BOLD, 30));
 		
-		add(new JLabel("È£Ãâ¿ë"), BorderLayout.NORTH);
+		//add(new JLabel("È£Ãâ¿ë"), BorderLayout.NORTH);
 		add(container);
 		setSize(400, 300);
 		setVisible(true);

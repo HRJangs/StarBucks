@@ -4,19 +4,22 @@
  * */
 package order.list;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import db.DBManager;
 import dto.Orders;
@@ -29,6 +32,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 	Vector<Orders> orderList = new Vector<Orders>();
 	JPanel p_title1, p_orderList;
 	JLabel la_title;
+	JScrollPane scroll;
 	
 	Thread thread;
 	
@@ -37,17 +41,24 @@ public class OrdersListMain extends JFrame implements Runnable{
 		con = manager.getConnection();
 		
 		this.setLayout(new FlowLayout());
+		this.setTitle("                주문한 제품 이름                             client_id, orders_id");
 		
 		p_orderList = new JPanel();
+		scroll = new JScrollPane(p_orderList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		/*la_title = new JLabel("주문한 제품 이름                         client_id, orders_id");
+		la_title.setBackground(new Color(0, 111, 73));
+		la_title.setOpaque(true);
+		la_title.setPreferredSize(new Dimension(540, 30));*/
 		
 		thread = new Thread(this);
 		thread.start();
-		//getOrderList();
 		
-		add(p_orderList);
+		add(scroll);
 
-		p_orderList.setPreferredSize(new Dimension(500, 600));
-		setSize(520, 600);
+		p_orderList.setPreferredSize(new Dimension(540, 650));
+		scroll.setPreferredSize(new Dimension(560, 650));
+		pack();
+		//setSize(520, 600);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -91,9 +102,9 @@ public class OrdersListMain extends JFrame implements Runnable{
 				p_orderList.add(panel_order);
 				p_orderList.updateUI();
 				
-				
 				System.out.println(order.getProduct_name() + ", " + order.getProduct_id() + ", " + order.getOrders_status());
 			}
+			p_orderList.setPreferredSize(new Dimension(540, orderList.size()*(30+5) + 50));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
