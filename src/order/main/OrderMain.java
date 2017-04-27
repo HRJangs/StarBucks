@@ -82,21 +82,11 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
 
-	String[] coffee = {"http://211.238.142.120:9090/data/Pos/1.jpg","http://211.238.142.120:9090/data/Pos/2.jpg",
-			"http://211.238.142.120:9090/data/Pos/8.jpg","http://211.238.142.120:9090/data/Pos/9.jpg","http://211.238.142.120:9090/data/Pos/10.jpg",
-			"http://211.238.142.120:9090/data/Pos/11.jpg","http://211.238.142.120:9090/data/Pos/12.jpg",
-			"http://211.238.142.120:9090/data/Pos/13.jpg","http://211.238.142.120:9090/data/Pos/14.jpg",
-			"http://211.238.142.120:9090/data/Pos/15.jpg"};
-	String[] drink = {"http://211.238.142.120:9090/data/Pos/3.jpg","http://211.238.142.120:9090/data/Pos/4.jpg",
-			"http://211.238.142.120:9090/data/Pos/16.jpg","http://211.238.142.120:9090/data/Pos/17.jpg","http://211.238.142.120:9090/data/Pos/18.jpg"
-			,"http://211.238.142.120:9090/data/Pos/19.jpg","http://211.238.142.120:9090/data/Pos/20.jpg",
-			"http://211.238.142.120:9090/data/Pos/21.jpg","http://211.238.142.120:9090/data/Pos/22.jpg"};
-	String[] bread = {"http://211.238.142.120:9090/data/Pos/5.jpg","http://211.238.142.120:9090/data/Pos/6.jpg",
-			"http://211.238.142.120:9090/data/Pos/7.jpg","http://211.238.142.120:9090/data/Pos/23.jpg",
-			"http://211.238.142.120:9090/data/Pos/24.jpg",
-			"http://211.238.142.120:9090/data/Pos/25.jpg","http://211.238.142.120:9090/data/Pos/26.jpg",
-			"http://211.238.142.120:9090/data/Pos/27.jpg","http://211.238.142.120:9090/data/Pos/28.jpg"};
-
+	ArrayList<String> coffee =new ArrayList<String>();
+	ArrayList<String> drink =new ArrayList<String>();
+	ArrayList<String> bread =new ArrayList<String>();
+	
+		
 	int total;
 	int order_number = 1;
 	JButton obj;
@@ -395,9 +385,17 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				dto.setProduct_id(rs.getInt("product_id"));
 				dto.setProduct_name(rs.getString("product_name"));
 				dto.setProduct_price(rs.getInt("product_price"));
-
+				dto.setProduct_img(rs.getString("product_image"));
 				product_list.add(dto);
-
+			}
+			for(int i=0;i<product_list.size();i++){
+				if(product_list.get(i).getProduct_category_id()==1){
+					coffee.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}else if(product_list.get(i).getProduct_category_id()==2){
+					drink.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}else if(product_list.get(i).getProduct_category_id()==3){
+					bread.add("http://211.238.142.120:9090/data/Pos/"+product_list.get(i).getProduct_img());
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -492,15 +490,15 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 						try {
 							if (obj.getText().equals("coffee")) {
 								System.out.println("Ä¿ÇÇ");
-								ImageIcon icon= new ImageIcon(new URL(coffee[cnt]));
+								ImageIcon icon= new ImageIcon(new URL(coffee.get(cnt)));
 								bt= new JButton(product_list.get(a).getProduct_name(), icon);
 						}else if(obj.getText().equals("drink")){
 							System.out.println("e");
-							ImageIcon icon= new ImageIcon(new URL(drink[cnt]));
+							ImageIcon icon= new ImageIcon(new URL(drink.get(cnt)));
 							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
 						}else if(obj.getText().equals("bread")){
 							System.out.println("Q");
-							ImageIcon icon= new ImageIcon(new URL(bread[cnt]));
+							ImageIcon icon= new ImageIcon(new URL(bread.get(cnt)));
 							 bt = new JButton(product_list.get(a).getProduct_name(), icon);
 						} }catch (MalformedURLException e) {
 							// TODO Auto-generated catch block
