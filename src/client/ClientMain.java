@@ -40,6 +40,12 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel p_main = new JPanel();
 	JPanel p_north = new JPanel();
 
+
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
+>>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 	JButton bt_home, bt_map, bt_reserv;
 	Canvas can_logo;
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
@@ -53,6 +59,12 @@ public class ClientMain extends JPanel implements ActionListener {
 
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
+
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
+>>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 
 	// 클라이언트 화면
 
@@ -165,6 +177,14 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_reserv.setForeground(Color.WHITE);
 
 		bt_reserv.setBorder(null);
+<<<<<<< HEAD
+		
+=======
+<<<<<<< HEAD
+		
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
+>>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 
 		bt_map.setPreferredSize(new Dimension(45, 25));
 		bt_reserv.setPreferredSize(new Dimension(45, 25));

@@ -158,7 +158,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 		bt_next.addActionListener(this);
 		bt_show.addActionListener(this);
 		
-		setPreferredSize(new Dimension(300*2, 400*2));
+		setPreferredSize(new Dimension(300*2, 400*2-300));
 	}
 	
 	//달력 갖다 붙이기
