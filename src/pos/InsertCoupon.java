@@ -26,15 +26,15 @@ public class InsertCoupon extends JFrame implements ActionListener{
 		p_up = new JPanel();
 		p_down = new JPanel();
 		choice = new Choice();
-		t_num = new JTextField(15);
+		t_num = new JTextField(13);
 		bt_back = new JButton("뒤로");
 		bt_reg = new JButton("발행");
 		for(int i=0;i<dataController.menu.size();i++){
 			choice.add(dataController.menu.get(i));
 		}
 	
-		choice.setPreferredSize(new Dimension(150, 50));
-		t_num.setPreferredSize(new Dimension(50,50));
+		choice.setPreferredSize(new Dimension(150, 30));
+		t_num.setPreferredSize(new Dimension(50,30));
 		p_center.setLayout(new GridLayout(2, 1));
 		p_up.add(choice);
 		p_down.add(t_num);
@@ -48,7 +48,7 @@ public class InsertCoupon extends JFrame implements ActionListener{
 		add(p_center);
 		add(p_south,BorderLayout.SOUTH);
 		setVisible(true);
-		setSize(200, 300);
+		setSize(200, 200);
 		setLocationRelativeTo(null);
 	}
 

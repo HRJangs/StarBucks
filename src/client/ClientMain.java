@@ -40,6 +40,8 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel p_main = new JPanel();
 	JPanel p_north = new JPanel();
 
+
+
 	JButton bt_home, bt_map, bt_reserv;
 	Canvas can_logo;
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
@@ -47,18 +49,14 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel[] pageList = new JPanel[7];
 	
 	// 이미지
-<<<<<<< HEAD
 	String[] path = { "http://211.238.142.120:9090/data/logo.png", "http://211.238.142.120:9090/data/main_reward_cup_ic.png",
 			"http://211.238.142.120:9090/data/main_card_ic.png", "http://211.238.142.120:9090/data/main_siren_ic.png",
 			"http://211.238.142.120:9090/data/home.png", "http://211.238.142.120:9090/data/map4.png", "http://211.238.142.120:9090/data/reservation.png" };
-=======
-	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
-			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png",
-			"http://localhost:9090/data/reservation.png" };
->>>>>>> 5779959e7e4d36871afcbf473110af0d5b2d5b4e
+
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
+
+
 
 	// 클라이언트 화면
 
@@ -171,6 +169,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_reserv.setForeground(Color.WHITE);
 
 		bt_reserv.setBorder(null);
+
 
 		bt_map.setPreferredSize(new Dimension(45, 25));
 		bt_reserv.setPreferredSize(new Dimension(45, 25));

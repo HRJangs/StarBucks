@@ -62,6 +62,7 @@ public class ClientThread extends Thread{
 				main.orders.p_center.removeAll();
 				pmain.ordermain.orders_list.removeAllElements();
 				pmain.ordermain.la_sum.setText("");
+				pmain.ordermain.la_count.setText("");
 				pmain.ordermain.p_center.removeAll();
 				pmain.ordermain.p_center.updateUI();
 				pmain.ordermain.la_null = new JLabel("담긴 메뉴가 없습니다.");

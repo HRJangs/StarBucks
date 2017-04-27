@@ -51,7 +51,7 @@ public class ClientMenuPanel extends JPanel implements ActionListener {
 		int id = product.getProduct_id();
 		try {
 			// 제품 이미지 가져오기
-			URL url = new URL("http://localhost:9090/data/" + id + ".jpg");
+			URL url = new URL("http://211.238.142.120:9090/data/" + id + ".jpg");
 			image = ImageIO.read(url);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

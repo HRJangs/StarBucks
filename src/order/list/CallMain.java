@@ -29,6 +29,8 @@ public class CallMain extends JFrame{
 	public CallMain() {
 		con = manager.getConnection();
 		
+		setTitle("»£√‚ √¢");
+		
 		container = new JPanel();
 		container.setLayout(new GridLayout(2, 3));
 		
