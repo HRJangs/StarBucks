@@ -81,13 +81,16 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 	Vector<ProductPanel> menu_list = new Vector<ProductPanel>();
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
-	String[] coffee = {"http://localhost:9090/data/1.jpg","http://localhost:9090/data/2.jpg","http://localhost:9090/data/8.jpg","http://localhost:9090/data/9.jpg","http://localhost:9090/data/10.jpg",
+	/*String[] coffee = {"http://localhost:9090/data/1.jpg","http://localhost:9090/data/2.jpg","http://localhost:9090/data/8.jpg","http://localhost:9090/data/9.jpg","http://localhost:9090/data/10.jpg",
 			"http://localhost:9090/data/11.jpg","http://localhost:9090/data/12.jpg","http://localhost:9090/data/13.jpg","http://localhost:9090/data/14.jpg","http://localhost:9090/data/15.jpg"};
 	String[] drink = {"http://localhost:9090/data/3.jpg","http://localhost:9090/data/4.jpg","http://localhost:9090/data/16.jpg","http://localhost:9090/data/17.jpg","http://localhost:9090/data/18.jpg"
 			,"http://localhost:9090/data/19.jpg","http://localhost:9090/data/20.jpg","http://localhost:9090/data/21.jpg","http://localhost:9090/data/22.jpg"};
 	String[] bread = {"http://localhost:9090/data/5.jpg","http://localhost:9090/data/6.jpg","http://localhost:9090/data/7.jpg","http://localhost:9090/data/23.jpg","http://localhost:9090/data/24.jpg",
 			"http://localhost:9090/data/25.jpg","http://localhost:9090/data/26.jpg","http://localhost:9090/data/27.jpg","http://localhost:9090/data/28.jpg"};
-	
+	*/
+	ArrayList<String> coffee=new ArrayList<String>();
+	ArrayList<String> drink=new ArrayList<String>();
+	ArrayList<String> bread=new ArrayList<String>();
 	int total;
 	int order_number = 1;
 	JButton obj;
@@ -324,7 +327,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 			e.printStackTrace();
 		}
 	}
-
+	
 	// 상위 버튼들 가져오기
 	// DB에서 가져온 버튼들을 다 만들고 누르면 DB길이만큼 버튼들 만들어지게
 	public void getMenu() {
@@ -388,7 +391,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 				dto.setProduct_id(rs.getInt("product_id"));
 				dto.setProduct_name(rs.getString("product_name"));
 				dto.setProduct_price(rs.getInt("product_price"));
-
+				
 				product_list.add(dto);
 
 			}
