@@ -31,6 +31,7 @@ public class ServerThread extends Thread {
 	String type;
 	String resType;
 	String cardType;
+	boolean flag=true;
 
 	public ServerThread(Socket socket) {
 		this.socket = socket;
@@ -263,6 +264,8 @@ public class ServerThread extends Thread {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} finally {
+			flag=false;
 		}
 	}
 
@@ -294,7 +297,7 @@ public class ServerThread extends Thread {
 
 	// 여기서 이제 서버가 처리해줄 껄 다 작성해줘야한다.
 	public void run() {
-		while(true){
+		while(flag){
 			listen();
 		}
 

@@ -102,7 +102,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 				p_orderList.add(panel_order);
 				p_orderList.updateUI();
 				
-				System.out.println(order.getProduct_name() + ", " + order.getProduct_id() + ", " + order.getOrders_status());
+				System.out.println(order.getProduct_name() + ", " + order.getProduct_id() + ", " + order.getOrders_status() + ", " + order.getOrders_type());
 			}
 			p_orderList.setPreferredSize(new Dimension(540, orderList.size()*(30+5) + 50));
 			
@@ -136,11 +136,11 @@ public class OrdersListMain extends JFrame implements Runnable{
 		return callMain;
 	}
 	
-	public void getFinish(int client_id) {
+	public void getFinish(int client_id, String type) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		//클라이언트 아이디가 같은 주문이 다 완료버튼이 눌리면 callMain으로 보내기 
-		String select_sql ="select * from orders where orders_client_id = ?";
+		String select_sql ="select * from orders where orders_client_id = ? and orders_type = ?";
 		//resultset으로 받아서 orders_status가 모두 완료이면 callMain의 callMember호출
 		Vector<Orders> isCompleted = new Vector<Orders>();
 		boolean flag = false;
@@ -148,6 +148,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		try {
 			pstmt = con.prepareStatement(select_sql);
 			pstmt.setInt(1, client_id);
+			pstmt.setString(2, type);
 			
 			rs = pstmt.executeQuery();
 			
@@ -172,6 +173,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		}
 		
 		
+
 		for (int i = 0; i < isCompleted.size(); i++) {
 			if (isCompleted.get(i).getOrders_status().equals("완료")) {
 				flag = true;
