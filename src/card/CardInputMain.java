@@ -147,6 +147,7 @@ public class CardInputMain extends JFrame implements ActionListener{
 		
 		setSize(500, 360);
 		setVisible(true);
+		setLocationRelativeTo(main);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 	}

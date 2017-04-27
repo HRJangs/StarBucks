@@ -36,17 +36,17 @@ public class IndividualOrder extends JPanel implements ActionListener{
 		la_order_west = new JLabel(order.getProduct_name(), JLabel.CENTER);
 		la_order_center = new JLabel(Integer.toString(order.getOrders_client_id()) +", " + order.getOrders_id(), JLabel.CENTER);
 		bt_finish = new JButton("¿Ï·á");
-		
+		bt_finish.setForeground(Color.white);
 		la_order_west.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		la_order_west.setPreferredSize(new Dimension(300, 30));
 		la_order_west.setOpaque(true);
-		la_order_west.setBackground(Color.pink);
+		la_order_west.setBackground(Color.WHITE);
 		
 		la_order_center.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		la_order_center.setPreferredSize(new Dimension(100, 30));
 		
 		bt_finish.setPreferredSize(new Dimension(100, 30));
-		bt_finish.setBackground(Color.WHITE);
+		bt_finish.setBackground(new Color(96, 96, 96));
 		
 		add(la_order_west, BorderLayout.WEST);
 		add(la_order_center);
