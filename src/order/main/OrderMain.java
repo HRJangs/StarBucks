@@ -51,13 +51,8 @@ import javafx.util.Duration;
 import order.payment.Payment;
 import pos.login.PosWindow;
 
-<<<<<<< HEAD
 
-public class OrderMain extends JPanel implements ActionListener,Runnable, ItemListener{
-=======
 public class OrderMain extends JPanel implements ActionListener, Runnable, ItemListener {
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
-
 	Connection con;
 	DBManager manager;
 	Thread thread;
@@ -65,40 +60,17 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	// p_east 전체화면 동쪽, p_west 전체화면 서쪽 p_product 주문한거뜨는 곳,p_topMenu메뉴 상위 버튼들 있는곳
 	// p_subMenu메뉴 하위버튼들 p_pay 결제하기버튼 있는 곳
 
-<<<<<<< HEAD
-
-	JPanel p_pos,p_product,p_component,p_topMenu,p_subMenu, p_sum,p_pay , p_east, p_west ,p_date,p_music ,p_etc ,p_con ,p_list;
-	JButton bt_pay, bt_allDelete,bt_stop,bt_play, bt_prev, bt_next,bt_reservation, bt_reservation_show ,bt_income , bt_stock;
-	
-=======
 	JPanel p_pos, p_product, p_component, p_topMenu, p_subMenu, p_sum, p_pay, p_east, p_west, p_date, p_music, p_etc,
 			p_con, p_list;
 	JButton bt_pay, bt_allDelete, bt_stop, bt_play, bt_prev, bt_next, bt_reservation, bt_reservation_show, bt_income,
 			bt_stock;
 
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 	CheckboxGroup group = new CheckboxGroup();
 	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
 	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
-<<<<<<< HEAD
+
 	JScrollPane scroll_menu, scroll_bt;
 
-	JScrollPane scroll;
-=======
-
-	
-	
-<<<<<<< HEAD
-=======
-	JScrollPane scroll_menu, scroll_bt;
-	
-
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
-
-	JScrollPane scroll;
-
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 	Canvas can;
 	BufferedImage image = null;
 
@@ -159,10 +131,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				e.printStackTrace();
 			}
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
 		//mediaBar.getChildren().add(timeLabel);
 		
@@ -189,58 +158,16 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		
 		bt_allDelete=new JButton("전체삭제");
 		bt_pay=new JButton("결제하기");
-<<<<<<< HEAD
 
-=======
-
-
-		// timeLabel.setMinWidth(Control.USE_PREF_SIZE);
-		// mediaBar.getChildren().add(timeLabel);
-
-		this.posWindow = posWindow;
-		p_date = new JPanel();
-
-		p_east = new JPanel();
-		p_west = new JPanel();
-		p_pos = new JPanel();
-		p_product = new JPanel();
-		p_component = new JPanel();
-		p_sum = new JPanel();
-		p_pay = new JPanel();
-
-		p_topMenu = new JPanel();
-		p_subMenu = new JPanel();
-		p_etc = new JPanel();
-		p_con = new JPanel();
-		p_date = new JPanel();
-		p_music = new JPanel();
-
-		scroll = new JScrollPane(p_component);
-
-		bt_allDelete = new JButton("전체삭제");
-		bt_pay = new JButton("결제하기");
-
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 		bt_allDelete.setBackground(Color.WHITE);
 		bt_pay.setBackground(Color.WHITE);
 		bt_allDelete.setPreferredSize(new Dimension(150, 50));
 		bt_pay.setPreferredSize(new Dimension(150, 50));
-
-<<<<<<< HEAD
-		
 		
 		bt_next=new JButton("▶▶");
 		bt_prev=new JButton("◀◀");
 		bt_play=new JButton("▶");
 		bt_stop=new JButton("||");
-		
-=======
-		bt_next = new JButton("▶▶");
-		bt_prev = new JButton("◀◀");
-		bt_play = new JButton("▶");
-		bt_stop = new JButton("||");
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 
 		bt_next.setBackground(Color.WHITE);
 		bt_next.setPreferredSize(new Dimension(70, 50));
@@ -280,11 +207,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 		scroll_menu.setPreferredSize(new Dimension(400, 350));
 		scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
-<<<<<<< HEAD
-=======
-		
-		
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 
 		try {
 			URL image_url = new URL("http://211.238.142.120:9090/data/sb_join.png");
@@ -350,10 +272,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		p_music.add(bt_play);
 		p_music.add(bt_next);
 
-<<<<<<< HEAD
-		
-=======
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 		p_music.add(cb_repeat_one);
 		p_music.add(cb_repeat_all);
 
@@ -538,11 +456,8 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 				}
 			}
 		}
-<<<<<<< HEAD
-
-=======
 	}
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
+
 
 	// 배열에 아메리카노 올리라고!!!!!!!!!!!!!!!!!!
 	private void InsertMenu(Product product) {
@@ -564,12 +479,9 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 	public void ShowMenu(JButton obj) {
 		p_subMenu.removeAll();
-<<<<<<< HEAD
-=======
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 		ArrayList<String> list  =new ArrayList<String>();
 		int cnt = 0;
+		
 		for(int i=0;i<bigMenu.size();i++){
 			if(obj.getText().equals(bigMenu.get(i).getProduct_category_name())){
 				int id=bigMenu.get(i).getProduct_category_id();
@@ -579,10 +491,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 						try {
 							if (obj.getText().equals("coffee")) {
 								System.out.println("커피");
-<<<<<<< HEAD
-=======
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 								ImageIcon icon= new ImageIcon(new URL(coffee[cnt]));
 								bt= new JButton(product_list.get(a).getProduct_name(), icon);
 						}else if(obj.getText().equals("drink")){
@@ -598,82 +506,25 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 							e.printStackTrace();
 						}
 						
-<<<<<<< HEAD
-						cnt++;
 
-						System.out.println("이거누르면 또 생성데");
-
-						bt.setBackground(Color.WHITE);
-=======
-<<<<<<< HEAD
-
-=======
-						cnt++;
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
-						System.out.println("이거누르면 또 생성데");
-
-						bt.setBackground(Color.WHITE);
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 						//bt.setPreferredSize(new Dimension(200,50));
 						bt.setPreferredSize(new Dimension(200,200));
 						bt.addActionListener(this);
-						
-<<<<<<< HEAD
-=======
 
-
-						bt.setPreferredSize(new Dimension(200, 50));
-
-
->>>>>>> a1c2fb43fc87c228f00dfe3933b514513495e6f1
 						p_subMenu.add(bt);
 						p_subMenu.updateUI();
 						}
 
-
-						
-
-<<<<<<< HEAD
-=======
-						/*
-						 * try { URL url = new URL("http://localhost:9090/data/"
-						 * + id + ".jpg"); image=ImageIO.read(url); } catch
-						 * (MalformedURLException e) { // TODO Auto-generated
-						 * catch block e.printStackTrace(); } catch (IOException
-						 * e) { // TODO Auto-generated catch block
-						 * e.printStackTrace(); } can=new Canvas() { public void
-						 * paint(Graphics g) { g.drawImage(image, 0, 0,
-						 * 70,70,this); }
-						 * 
-						 * }; can.setPreferredSize(new Dimension(70, 70));
-						 * p_subMenu.add(can); p_subMenu.updateUI();
-						 */
-
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 					}
 				}
 			}
 		}
-<<<<<<< HEAD
-	}
-
 	
-	//전체삭제 버튼 누르면 메뉴 전체삭제
-	public void allDelete(){
-		int ans=JOptionPane.showConfirmDialog(this, "전체삭제?");
-		if(ans==JOptionPane.OK_OPTION){
-			total=0;
-			
-=======
-	
-
 	// 전체삭제 버튼 누르면 메뉴 전체삭제
 	public void allDelete() {
 		int ans = JOptionPane.showConfirmDialog(this, "전체삭제?");
 		if (ans == JOptionPane.OK_OPTION) {
 			total = 0;
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 
 			menu_list.removeAll(menu_list);
 			p_component.removeAll();
@@ -747,10 +598,6 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		}
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 	public void itemStateChanged(ItemEvent e) {
 		if (cb_repeat_one.getState()) {
 			repeat_all_flag = false;
@@ -829,12 +676,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		num++;
 		music.next(num);
 
-<<<<<<< HEAD
-		
-		if(repeat_all_flag&&!repeat_one_flag){//전곡반복이라면,
-=======
 		if (repeat_all_flag && !repeat_one_flag) {// 전곡반복이라면,
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
 			repeat_all();
 		} else {// 한곡반복이라면,
 			repeat_one();
@@ -858,16 +700,10 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		}
 	}
 
-<<<<<<< HEAD
-
 	//목록가져오기
 	public void getList(){
 		FileChooser chooser=new FileChooser();
-=======
-	// 목록가져오기
-	public void getList() {
-		FileChooser chooser = new FileChooser();
->>>>>>> fe30cade06774ffa82ef721500f52bac13fec62b
+
 		chooser.getExtensionFilters().add(new ExtensionFilter("*.mp3"));
 		File file = chooser.showOpenDialog(null);
 		String path = file.getAbsolutePath();

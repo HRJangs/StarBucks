@@ -139,7 +139,7 @@ public class CardListMain extends JPanel implements ActionListener {
 
 		// 이미지 url 얻어오기
 		try {
-			URL url = new URL("http://localhost:9090/data/creaditcard.png");
+			URL url = new URL("http://211.238.142.120:9090/data/creaditcard.png");
 			image = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();

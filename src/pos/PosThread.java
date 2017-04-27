@@ -13,7 +13,7 @@ public class PosThread extends Thread{
 	//家南 立加 包访
 	Socket socket;
 	int port = 7778;
-	String host = "211.238.142.118";
+	String host = "211.238.142.120";
 	DataOutputStream dos;
 	FileInputStream fis;
 	String fileName;
