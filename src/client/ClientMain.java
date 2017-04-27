@@ -31,11 +31,8 @@ import dto.Member;
 import dto.Product;
 import dto.Product_category;
 import member.MemberWindow;
-<<<<<<< HEAD
-import order.main.ProductPanel;
-=======
 import reservation.ReservationMain;
->>>>>>> c0c573cafa309294e2ec3822c730ebb88256f6e0
+
 
 public class ClientMain extends JPanel implements ActionListener {
 
@@ -44,11 +41,7 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel p_main = new JPanel();
 	JPanel p_north = new JPanel();
 
-<<<<<<< HEAD
-	JButton bt_home, bt_map;
-=======
 	JButton bt_home, bt_map, bt_reserv;
->>>>>>> c0c573cafa309294e2ec3822c730ebb88256f6e0
 	Canvas can_logo;
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
 
@@ -57,14 +50,9 @@ public class ClientMain extends JPanel implements ActionListener {
 	// 이미지
 	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
 			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-<<<<<<< HEAD
-			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png" };
-	BufferedImage[] image = new BufferedImage[6];
-=======
 			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png", "http://localhost:9090/data/reservation.png" };
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
->>>>>>> c0c573cafa309294e2ec3822c730ebb88256f6e0
 
 	// 클라이언트 화면
 
@@ -172,16 +160,11 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_event.setForeground(Color.WHITE);
 		bt_myPage.setForeground(Color.WHITE);
 		bt_card.setForeground(Color.WHITE);
-<<<<<<< HEAD
-		bt_map.setForeground(Color.white);
-
-=======
 		bt_map.setForeground(Color.WHITE);
 		bt_reserv.setForeground(Color.WHITE);
 		
 		bt_reserv.setBorder(null);
 		
->>>>>>> c0c573cafa309294e2ec3822c730ebb88256f6e0
 		bt_map.setPreferredSize(new Dimension(45, 25));
 		bt_reserv.setPreferredSize(new Dimension(45, 25));
 		// 이미지내 텍스트 위치
