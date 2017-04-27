@@ -2,6 +2,7 @@ package pos;
 
 import java.awt.BorderLayout;
 import java.awt.Choice;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,13 +25,14 @@ public class IssueCoupon extends JFrame implements ActionListener{
 		this.str=str;
 		this.dataController = dataController;
 		choice = new Choice();
-		t_id = new JTextField(10);
+		t_id = new JTextField(14);
 		p_center = new JPanel();
 		p_south =new JPanel();
 		bt_reg = new JButton("발행");
 		bt_back = new JButton("뒤로");
 		t_id.setText(str);
 		t_id.setEnabled(false);
+		choice.add("--쿠폰을 선택해주세요--");
 		for(int i=0;i<dataController.coupon.size();i++){
 			choice.add((String) dataController.coupon.get(i).get(0));
 		}
@@ -43,8 +45,11 @@ public class IssueCoupon extends JFrame implements ActionListener{
 		bt_reg.addActionListener(this);
 		add(p_center);
 		add(p_south,BorderLayout.SOUTH);
+		
+		t_id.setPreferredSize(new Dimension(20, 30));
+		
 		setVisible(true);
-		setSize(300, 300);
+		setSize(250, 150);
 		setLocationRelativeTo(null);
 		
 		

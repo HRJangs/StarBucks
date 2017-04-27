@@ -19,6 +19,7 @@ import javax.swing.UIManager;
 
 import dto.Member;
 import pos.login.PosWindow;
+import reservation.ReservationMain;
 
 public class AdminPage extends JPanel{
 	
@@ -61,7 +62,7 @@ public class AdminPage extends JPanel{
 		tabbedPane.addTab("재고관리",new GoodsPanel());
 		tabbedPane.addTab("레시피관리",new RecipePanel());
 		tabbedPane.addTab("공지사항관리",new BoardPanel(posWindow));
-		//tabbedPane.add("예약관리",new ReservationPanel(new Member()));
+		tabbedPane.addTab("예약관리",new ReservationMain(new Member()));
 		tabbedPane.addTab("쿠폰관리", new CouponPanel());
 		add(tabbedPane);
 		
@@ -73,7 +74,7 @@ public class AdminPage extends JPanel{
 	public void getImage(){
 		URL url;
 		try {
-			url = new URL("http://localhost:9090/data/home_img.jpg");
+			url = new URL("http://211.238.142.120:9090/data/home_img.jpg");
 			bufferedImage = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -3,11 +3,11 @@ package dto;
 import java.sql.Timestamp;
 
 public class Orders {
-	private int orders_id=1;
-	private int product_id=3;
-	private Timestamp orders_date=new Timestamp(1492040411581L);
-	private int orders_emp_id=2;
-	private int orders_client_id=1;
+	private int orders_id;
+	private int product_id;
+	private Timestamp orders_date;
+	private int orders_emp_id;
+	private int orders_client_id;
 	private String orders_status="ready"; //0이 준비중
 	private String orders_payment_type;
 	private String orders_type="offline";

@@ -158,7 +158,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 		bt_next.addActionListener(this);
 		bt_show.addActionListener(this);
 		
-		setPreferredSize(new Dimension(300*2, 400*2));
+		setPreferredSize(new Dimension(300*2, 400*2-300));
 	}
 	
 	//달력 갖다 붙이기
@@ -328,7 +328,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 			try {
 				if(selectRoom.equals("1번 스터디룸")) {
 					for(int i = 0; i < url_small.length; i++) {
-						url_small[i] = new URL("http://localhost:9090/data/reserve1-"+ (i + 1)+".jpg");
+						url_small[i] = new URL("http://211.238.142.120:9090/data/reserve1-"+ (i + 1)+".jpg");
 						System.out.println(url_small[i].toString());
 						
 						CreateSmallCan small = new CreateSmallCan(url_small[i], this);
@@ -349,7 +349,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 					
 				} else if(selectRoom.equals("2번 스터디룸")) {
 					for(int i = 0; i < url_small.length; i++) {
-						url_small[i] = new URL("http://localhost:9090/data/reserve2-"+ (i + 1)+".jpg");
+						url_small[i] = new URL("http://211.238.142.120:9090/data/reserve2-"+ (i + 1)+".jpg");
 						System.out.println(url_small[i].toString());
 						
 						CreateSmallCan small = new CreateSmallCan(url_small[i], this);

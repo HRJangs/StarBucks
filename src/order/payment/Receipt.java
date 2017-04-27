@@ -35,7 +35,7 @@ public class Receipt extends JFrame{
 		panel.setBackground(Color.WHITE);
 		this.setTitle("Receipt");
 		try {
-			image = ImageIO.read(new URL("http://localhost:9090/data/black_logo.png"));
+			image = ImageIO.read(new URL("http://211.238.142.120:9090/data/black_logo.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

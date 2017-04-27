@@ -19,6 +19,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import db.DBManager;
+import dto.Product;
 
 public class DataController{
 	
@@ -112,7 +113,7 @@ public class DataController{
 		}
 	}
 	public void productList(){
-		String sql = "select p.product_name ,r.milk, r.coffee,r.honeybread,r.muffin,r.cake,r.apple,r.orange ,r.caramel,r.chocopowder,r.whitechocopowder,r.mango,r.grape,r.blueberry,r.tomato,r.hanrabong,r.bagle,r.scone,r.roll,r.danish,r.twist,r.triple_bean  from product p INNER JOIN recipe r on p.product_id = r.product_id  group by p.product_id";
+		String sql = "select p.product_id,p.product_name ,p.product_price,r.milk, r.coffee,r.honeybread,r.muffin,r.cake,r.apple,r.orange ,r.caramel,r.chocopowder,r.whitechocopowder,r.mango,r.grape,r.blueberry,r.tomato,r.hanrabong,r.bagle,r.scone,r.roll,r.danish,r.twist,r.triple_bean  from product p INNER JOIN recipe r on p.product_id = r.product_id  group by p.product_id";
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
 		try {
@@ -320,10 +321,12 @@ public class DataController{
 		String data =(String) model.getValueAt(row, col);
 		String pk = (String) model.getValueAt(row, 0);
 		String column=(String) model.getColumnName(col);
+		String sql=null;
 		if(type.equals("product")){
-			String sql ="update " +type+" set "+column+" ='"+data+"' where product_id ="+pk;
+			 sql ="update recipe set "+column+" ='"+data+"' where product_id ="+pk;
+		}else{
+			 sql ="update " +type+" set "+column+" ='"+data+"' where "+type+"_id ="+pk;
 		}
-		String sql ="update " +type+" set "+column+" ='"+data+"' where "+type+"_id ="+pk;
 		System.out.println(sql);
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -518,10 +521,49 @@ public class DataController{
 			}
 			getList("member");
 			myPanel.table.updateUI();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void addMenu(Product dto){
+		String sql = "insert into Product(product_category_id,product_name,product_price) values(?,?,?)";
+		String sql2 = "select Product_id from product where product_name='"+dto.getProduct_name()+"'";
+		String sql3 = "insert into Recipe(product_id) values(?)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String name=null;
+		try {
+			pstmt =con.prepareStatement(sql);
+			pstmt.setString(1, Integer.toString(dto.getProduct_category_id()));
+			pstmt.setString(2, dto.getProduct_name());
+			pstmt.setString(3, Integer.toString(dto.getProduct_price()));
+			int result = pstmt.executeUpdate();
+			//////////////////////////////
+			pstmt= con.prepareStatement(sql2);
+			rs =  pstmt.executeQuery();
+			while(rs.next()){
+				name=rs.getString(1);
+			}
+			/////////////////////////////////
+			pstmt=con.prepareStatement(sql3);
+			pstmt.setString(1, name);
+			int result2= pstmt.executeUpdate();
+			//////////////////////////////
+			if(result==1&&result2==1){
+				System.out.println("등록완료");
+			}
+			data.removeAll(data);
+			productList();
+			myPanel.table.updateUI();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 }
