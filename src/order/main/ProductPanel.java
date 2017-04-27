@@ -1,6 +1,7 @@
 package order.main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -38,7 +39,8 @@ public class ProductPanel extends JPanel{
 		la_name=new JLabel(info.getProduct_name());
 		la_name.setPreferredSize(new Dimension(200, 50));
 		la_name.setFont(new Font("µ¸¿ò", Font.BOLD , 20 ));
-		//la_name.setBackground(Color.BLACK);
+		la_name.setBackground(Color.LIGHT_GRAY);
+	
 		
 		la_number=new JLabel("1");
 		la_number.setPreferredSize(new Dimension(100, 50));
