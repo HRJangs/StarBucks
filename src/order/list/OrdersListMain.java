@@ -4,6 +4,8 @@
  * */
 package order.list;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.ScrollPane;
@@ -39,18 +41,22 @@ public class OrdersListMain extends JFrame implements Runnable{
 		con = manager.getConnection();
 		
 		this.setLayout(new FlowLayout());
+		this.setTitle("                주문한 제품 이름                             client_id, orders_id");
 		
 		p_orderList = new JPanel();
 		scroll = new JScrollPane(p_orderList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		/*la_title = new JLabel("주문한 제품 이름                         client_id, orders_id");
+		la_title.setBackground(new Color(0, 111, 73));
+		la_title.setOpaque(true);
+		la_title.setPreferredSize(new Dimension(540, 30));*/
 		
 		thread = new Thread(this);
 		thread.start();
-		//getOrderList();
 		
 		add(scroll);
 
-		p_orderList.setPreferredSize(new Dimension(540, 600));
-		scroll.setPreferredSize(new Dimension(560, 600));
+		p_orderList.setPreferredSize(new Dimension(540, 650));
+		scroll.setPreferredSize(new Dimension(560, 650));
 		pack();
 		//setSize(520, 600);
 		setVisible(true);
@@ -64,7 +70,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from orders o, product p where o.product_id = p.product_id and o.orders_status = 'ready'";
+		String sql = "select * from orders o, product p where o.product_id = p.product_id and o.orders_status = 'ready' order by orders_id asc";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -98,7 +104,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 				
 				System.out.println(order.getProduct_name() + ", " + order.getProduct_id() + ", " + order.getOrders_status());
 			}
-			p_orderList.setPreferredSize(new Dimension(540, orderList.size()*(30+5)));
+			p_orderList.setPreferredSize(new Dimension(540, orderList.size()*(30+5) + 50));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

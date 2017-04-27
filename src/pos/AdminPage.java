@@ -74,7 +74,7 @@ public class AdminPage extends JPanel{
 	public void getImage(){
 		URL url;
 		try {
-			url = new URL("http://localhost:9090/data/home_img.jpg");
+			url = new URL("http://211.238.142.120:9090/data/home_img.jpg");
 			bufferedImage = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();

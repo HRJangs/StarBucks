@@ -130,23 +130,29 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 		if(obj == bt_cancel) {
 			this.dispose();
 		} else if(obj == bt_send) {
-			String pw = t_pw.getText();
 			
-			System.out.println("사용자 입력 : " + pw);
-			if(index != 0) {
-				if(pw.equals(card_pw)) {
-					ClientThread thread = new ClientThread(main, orders_list, this);
-					thread.start();
-				}
-				else {
-					JOptionPane.showMessageDialog(this, "카드 비밀번호를 확인해주세요.");
-				}
+			if(card_list.size() == 0) {
+				JOptionPane.showMessageDialog(this, "카드 등록 후 주문해주세요.");
 			}
 			else {
-					JOptionPane.showMessageDialog(this, "카드 선택을 해주세요!");
+				String pw = t_pw.getText();
+				
+				System.out.println("사용자 입력 : " + pw);
+				if(index != 0) {
+					if(pw.equals(card_pw)) {
+						ClientThread thread = new ClientThread(main, orders_list, this);
+						thread.start();
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "카드 비밀번호를 확인해주세요.");
+					}
+				}
+				else {
+						JOptionPane.showMessageDialog(this, "카드 선택을 해주세요!");
+				}
 			}
 		}
-		
+
 	}
 
 	public void focusGained(FocusEvent e) {

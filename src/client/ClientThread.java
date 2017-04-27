@@ -25,7 +25,7 @@ public class ClientThread extends Thread{
 	//소켓 접속 관련
 		Socket socket;
 		int port = 7777;
-		String host = "211.238.142.119";
+		String host = "211.238.142.120";
 		BufferedReader buffr;
 		BufferedWriter buffw;
 	
@@ -62,6 +62,7 @@ public class ClientThread extends Thread{
 				main.orders.p_center.removeAll();
 				pmain.ordermain.orders_list.removeAllElements();
 				pmain.ordermain.la_sum.setText("");
+				pmain.ordermain.la_count.setText("");
 				pmain.ordermain.p_center.removeAll();
 				pmain.ordermain.p_center.updateUI();
 				pmain.ordermain.la_null = new JLabel("담긴 메뉴가 없습니다.");

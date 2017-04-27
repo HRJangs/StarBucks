@@ -33,7 +33,6 @@ import dto.Product_category;
 import member.MemberWindow;
 import reservation.ReservationMain;
 
-
 public class ClientMain extends JPanel implements ActionListener {
 
 	// 메인 화면~!
@@ -41,20 +40,27 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel p_main = new JPanel();
 	JPanel p_north = new JPanel();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
 	JButton bt_home, bt_map, bt_reserv;
 	Canvas can_logo;
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
 
 	JPanel[] pageList = new JPanel[7];
-
+	
 	// 이미지
-	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
-			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png", "http://localhost:9090/data/reservation.png" };
+	String[] path = { "http://211.238.142.120:9090/data/logo.png", "http://211.238.142.120:9090/data/main_reward_cup_ic.png",
+			"http://211.238.142.120:9090/data/main_card_ic.png", "http://211.238.142.120:9090/data/main_siren_ic.png",
+			"http://211.238.142.120:9090/data/home.png", "http://211.238.142.120:9090/data/map4.png", "http://211.238.142.120:9090/data/reservation.png" };
+
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
 
 	// 클라이언트 화면
 
@@ -79,7 +85,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		p_center = new JPanel();
 		p_map = new JPanel();
 		p_map.setLayout(new BorderLayout());
-		
+
 		// 이미지 url 얻어오기
 		try {
 			for (int i = 0; i < path.length; i++) {
@@ -95,11 +101,11 @@ public class ClientMain extends JPanel implements ActionListener {
 				g.drawImage((Image) image[0], 150, 0, 300, 30, this);
 			}
 		};
-		
+
 		bt_home = new JButton(new ImageIcon(image[4]));
 		bt_map = new JButton(new ImageIcon(image[5]));
 		bt_reserv = new JButton(new ImageIcon(image[6]));
-		
+
 		bt_rewards = new JButton("Rewards", new ImageIcon(image[1]));
 		bt_event = new JButton("Event");
 		bt_myPage = new JButton("My page");
@@ -137,7 +143,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		la_north.setBounds(0, 55, 600, 25);
 
 		add(p_main);
-		p_map.add(bt_reserv,BorderLayout.WEST);
+		p_map.add(bt_reserv, BorderLayout.WEST);
 		p_map.add(bt_home);
 		p_map.add(bt_map, BorderLayout.EAST);
 
@@ -165,9 +171,12 @@ public class ClientMain extends JPanel implements ActionListener {
 
 		bt_map.setForeground(Color.WHITE);
 		bt_reserv.setForeground(Color.WHITE);
-		
+
 		bt_reserv.setBorder(null);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> b9bfcbd8db5201280628f0730795a35d13cc7e20
 
 		bt_map.setPreferredSize(new Dimension(45, 25));
 		bt_reserv.setPreferredSize(new Dimension(45, 25));
@@ -196,7 +205,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_home.addActionListener(this);
 		bt_map.addActionListener(this);
 		bt_reserv.addActionListener(this);
-		
+
 		// 각종 데이터 다 가져오기(상품, 회원)
 		getData();
 
@@ -211,7 +220,6 @@ public class ClientMain extends JPanel implements ActionListener {
 	public void getData() {
 		con = manager.getConnection();
 		getMember();
-		getSubMenu();
 	}
 
 	public void getMember() {
@@ -219,7 +227,6 @@ public class ClientMain extends JPanel implements ActionListener {
 		ResultSet rs = null;
 
 		String sql = "select * from member where member_login_id='" + login_id + "'";
-
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -367,7 +374,7 @@ public class ClientMain extends JPanel implements ActionListener {
 			setPage(0);
 		} else if (obj == bt_map) {
 			setPage(5);
-		} else if(obj== bt_reserv){
+		} else if (obj == bt_reserv) {
 			setPage(6);
 		}
 	}
@@ -387,8 +394,8 @@ public class ClientMain extends JPanel implements ActionListener {
 		pageList[4] = card;
 		pageList[5] = map;
 		pageList[6] = reservation;
-		
-		for (int i = 1; i<pageList.length; i++) {
+
+		for (int i = 1; i < pageList.length; i++) {
 			// 넣기
 			p_page.add(pageList[i]);
 			pageList[i].setVisible(false);

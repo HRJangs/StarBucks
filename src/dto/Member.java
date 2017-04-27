@@ -2,7 +2,7 @@ package dto;
 
 public class Member {
 	private int member_id;
-	private String member_login_id="hi";
+	private String member_login_id;
 	private String member_login_pw;
 	private String member_name;
 	private String member_nickname;
