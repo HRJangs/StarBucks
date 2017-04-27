@@ -70,7 +70,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from orders o, product p where o.product_id = p.product_id and o.orders_status = 'ready'";
+		String sql = "select * from orders o, product p where o.product_id = p.product_id and o.orders_status = 'ready' order by orders_id asc";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
