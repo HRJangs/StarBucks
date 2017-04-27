@@ -40,7 +40,7 @@ public class IndividualOrder extends JPanel implements ActionListener{
 		la_order_west.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		la_order_west.setPreferredSize(new Dimension(300, 30));
 		la_order_west.setOpaque(true);
-		la_order_west.setBackground(Color.yellow);
+		la_order_west.setBackground(Color.pink);
 		
 		la_order_center.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		la_order_center.setPreferredSize(new Dimension(100, 30));
@@ -55,7 +55,7 @@ public class IndividualOrder extends JPanel implements ActionListener{
 		
 		setVisible(true);
 		setPreferredSize(new Dimension(500, 30));
-		setBackground(Color.pink);
+		setBackground(Color.LIGHT_GRAY);
 
 	}
 	

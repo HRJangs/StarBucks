@@ -32,6 +32,8 @@ import javax.swing.JTextField;
 
 import client.ClientMain;
 import db.DBManager;
+import order.list.CallMain;
+import order.list.OrdersListMain;
 import order.main.OrderMain;
 import pos.AdminPage;
 
@@ -246,6 +248,10 @@ public class LoginForm extends JPanel implements ActionListener ,FocusListener{
 					}else if(emp_Login){
 						posWindow.page[2].add(new OrderMain(posWindow));
 						posWindow.setPage(2);
+						
+						CallMain callMain = new CallMain();
+						OrdersListMain orderlistMain = new OrdersListMain();
+						orderlistMain.setCallMain(callMain);
 					}
 				} else {
 				JOptionPane.showMessageDialog(this, "로그인 정보가 올바르지 않습니다.");
