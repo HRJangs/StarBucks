@@ -50,10 +50,7 @@ import javafx.util.Duration;
 import order.payment.Payment;
 import pos.login.PosWindow;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 public class OrderMain extends JPanel implements ActionListener,Runnable, ItemListener{
 
 	Connection con;
@@ -63,21 +60,14 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 	// p_east 전체화면 동쪽, p_west 전체화면 서쪽 p_product 주문한거뜨는 곳,p_topMenu메뉴 상위 버튼들 있는곳
 	// p_subMenu메뉴 하위버튼들 p_pay 결제하기버튼 있는 곳
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 	JPanel p_pos,p_product,p_component,p_topMenu,p_subMenu, p_sum,p_pay , p_east, p_west ,p_date,p_music ,p_etc ,p_con ,p_list;
 	JButton bt_pay, bt_allDelete,bt_stop,bt_play, bt_prev, bt_next,bt_reservation, bt_reservation_show ,bt_income , bt_stock;
 	
 	CheckboxGroup group = new CheckboxGroup();
 	Checkbox cb_repeat_one = new Checkbox("한곡반복", false, group);
 	Checkbox cb_repeat_all = new Checkbox("전곡반복", true, group);
-	
-<<<<<<< HEAD
-	
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
+
 	JScrollPane scroll;
 
 	Canvas can;
@@ -133,10 +123,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 				e.printStackTrace();
 			}
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 		//timeLabel.setMinWidth(Control.USE_PREF_SIZE);
 		//mediaBar.getChildren().add(timeLabel);
 		
@@ -167,10 +154,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		bt_pay.setBackground(Color.WHITE);
 		bt_allDelete.setPreferredSize(new Dimension(150, 50));
 		bt_pay.setPreferredSize(new Dimension(150, 50));
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 		
 		
 		bt_next=new JButton("▶▶");
@@ -178,10 +162,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		bt_play=new JButton("▶");
 		bt_stop=new JButton("||");
 		
-<<<<<<< HEAD
-=======
-		
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
+
 		bt_next.setBackground(Color.WHITE);
 		bt_next.setPreferredSize(new Dimension(70, 50));
 		bt_prev.setBackground(Color.WHITE);
@@ -281,10 +262,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		p_music.add(bt_stop);
 		p_music.add(bt_play);
 		p_music.add(bt_next);
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 		
 		p_music.add(cb_repeat_one);
 		p_music.add(cb_repeat_all);
@@ -472,12 +450,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 				}
 			}
 		}
-<<<<<<< HEAD
-	
 
-
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 
 	// 배열에 아메리카노 올리라고!!!!!!!!!!!!!!!!!!
 	private void InsertMenu(Product product) {
@@ -525,11 +498,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 						System.out.println("이거누르면 또 생성데");
 
 						bt.addActionListener(this);
@@ -562,20 +531,13 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 						p_subMenu.add(can);
 						p_subMenu.updateUI();*/
 						
-<<<<<<< HEAD
-		
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 					}
 				}
 			}
 		}
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 	
 	//전체삭제 버튼 누르면 메뉴 전체삭제
 	public void allDelete(){
@@ -583,10 +545,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		if(ans==JOptionPane.OK_OPTION){
 			total=0;
 			
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 			menu_list.removeAll(menu_list);
 			p_component.removeAll();
 			p_component.updateUI();
@@ -658,11 +617,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 			}
 		}
 	}
-<<<<<<< HEAD
 
-	
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 	
 	public void itemStateChanged(ItemEvent e) {
 		if(cb_repeat_one.getState()){
@@ -724,10 +679,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 			repeat_one();
 		}
 		System.out.println(count);
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 	}
 
 	public void musicStop() {
@@ -745,20 +697,16 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		}
 		num++;
 		music.next(num);
-<<<<<<< HEAD
 
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 		
 		if(repeat_all_flag&&!repeat_one_flag){//전곡반복이라면,
 			repeat_all();
 		}else{//한곡반복이라면,
 			repeat_one();
 		}
-<<<<<<< HEAD
+
 		
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
+
 	}
 
 	public void prevMusic() {
@@ -777,10 +725,7 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 		}
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
+
 	//목록가져오기
 	public void getList(){
 		FileChooser chooser=new FileChooser();
@@ -792,9 +737,5 @@ public class OrderMain extends JPanel implements ActionListener,Runnable, ItemLi
 
 		
 	}
-	
-<<<<<<< HEAD
-=======
 
->>>>>>> 9d368429e1d122a1dbf06e8142df141246bb7727
 }
