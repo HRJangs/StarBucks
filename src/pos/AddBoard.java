@@ -34,7 +34,7 @@ public class AddBoard extends JFrame implements ActionListener{
 		this.posWindow=posWindow;
 		manager = DBManager.getInstance();
 		con = manager.getConnection();
-		t_content = new JTextArea(27,30);
+		t_content = new JTextArea(25,30);
 		t_title = new JTextField(20);
 		t_writer = new JTextField(5);
 		bt_back = new JButton("뒤로");
@@ -80,8 +80,9 @@ public class AddBoard extends JFrame implements ActionListener{
 			System.out.println(sb.toString());
 			JOptionPane.showMessageDialog(this, "게시글 등록 완료");
 			this.dispose();
-			panel.updateTable();
+			panel.setTable();
 			panel.table.updateUI();
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
