@@ -123,7 +123,7 @@ public class ClientOrders extends JPanel implements ActionListener {
 			/*JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION,
 					JOptionPane.WARNING_MESSAGE);*/
 
-			OrdersPay pay = new OrdersPay(main, orders_list);
+			OrdersPay pay = new OrdersPay(main, orders_list, this);
 			// 라벨에 더해진 것들의 product를 가져와야한다.
 			/*ClientThread thread = new ClientThread(main, orders_list);
 			thread.start();*/

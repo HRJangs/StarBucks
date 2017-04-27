@@ -4,19 +4,20 @@
  * */
 package order.list;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import db.DBManager;
 import dto.Orders;
@@ -29,6 +30,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 	Vector<Orders> orderList = new Vector<Orders>();
 	JPanel p_title1, p_orderList;
 	JLabel la_title;
+	JScrollPane scroll;
 	
 	Thread thread;
 	
@@ -39,15 +41,18 @@ public class OrdersListMain extends JFrame implements Runnable{
 		this.setLayout(new FlowLayout());
 		
 		p_orderList = new JPanel();
+		scroll = new JScrollPane(p_orderList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		thread = new Thread(this);
 		thread.start();
 		//getOrderList();
 		
-		add(p_orderList);
+		add(scroll);
 
-		p_orderList.setPreferredSize(new Dimension(500, 600));
-		setSize(520, 600);
+		p_orderList.setPreferredSize(new Dimension(540, 600));
+		scroll.setPreferredSize(new Dimension(560, 600));
+		pack();
+		//setSize(520, 600);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -91,9 +96,9 @@ public class OrdersListMain extends JFrame implements Runnable{
 				p_orderList.add(panel_order);
 				p_orderList.updateUI();
 				
-				
 				System.out.println(order.getProduct_name() + ", " + order.getProduct_id() + ", " + order.getOrders_status());
 			}
+			p_orderList.setPreferredSize(new Dimension(540, orderList.size()*(30+5)));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

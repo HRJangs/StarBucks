@@ -165,6 +165,7 @@ public class CardInputMain extends JFrame implements ActionListener{
 		
 		Card card = new Card();
 		card.setCard_number(cardNumber.toString());
+		card.setMember_id(main.main.clientMain.member.getMember_id());
 		card.setCard_username(name);
 		card.setCard_valid(valid);
 		card.setCard_companyname(company_name);

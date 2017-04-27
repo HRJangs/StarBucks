@@ -60,6 +60,17 @@ public class ClientThread extends Thread{
 			
 			if(data.equals("주문완료")){
 				main.orders.p_center.removeAll();
+				pmain.ordermain.orders_list.removeAllElements();
+				pmain.ordermain.la_sum.setText("");
+				pmain.ordermain.p_center.removeAll();
+				pmain.ordermain.p_center.updateUI();
+				pmain.ordermain.la_null = new JLabel("담긴 메뉴가 없습니다.");
+				pmain.ordermain.la_null.setFont(new Font("돋움", Font.BOLD, 20));
+				pmain.ordermain.p_center.add(pmain.ordermain.la_null);
+
+				for (int i = 0; i < pmain.ordermain.panel_list.size(); i++) {
+					pmain.ordermain.panel_list.get(i).p_count = 1;
+				}
 				pmain.dispose();
 				//JLabel la = new JLabel("주문완료! 창구를 확인해주세요");
 				//la.setFont(new Font("돋움", Font.BOLD, 30));

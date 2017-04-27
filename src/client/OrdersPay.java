@@ -3,6 +3,7 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,9 +26,12 @@ import dto.Card;
 import dto.Product;
 
 public class OrdersPay extends JFrame implements ActionListener, FocusListener, ItemListener{
+	ClientOrders ordermain;
+	
 	JPanel p_center, p_south;
-	Choice choice;
-	JButton bt_send;
+	//Choice choice;
+	JComboBox<String> choice;
+	JButton bt_send, bt_cancel;
 	JPasswordField t_pw;
 	ClientMain main;
 	Vector<Product> orders_list;
@@ -35,27 +40,35 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 	String card_pw;
 	int index;
 	
-	public OrdersPay(ClientMain main, Vector<Product> orders_list) {
+	public OrdersPay(ClientMain main, Vector<Product> orders_list, ClientOrders ordermain) {
 		this.main = main;
 		this.orders_list = orders_list;
+		this.ordermain = ordermain;
 		
 		p_center = new JPanel();
 		p_south = new JPanel();
-		choice = new Choice();
+		choice = new JComboBox<String>();
+		//choice = new Choice();
 		bt_send = new JButton("주문 완료");
-		//bt_cancel = new JButton("취소");
-		t_pw = new JPasswordField("PW입력", 20);
+		bt_cancel = new JButton("취소");
+		t_pw = new JPasswordField("PW입력", 25);
 		
-		choice.add("카드 선택해주세요.");
+		p_center.setBackground(Color.WHITE);
+		p_south.setBackground(Color.WHITE);
+		bt_send.setBackground(new Color(123, 109, 100));
+		bt_cancel.setBackground(new Color(123, 109, 100));
+		
+		p_center.setLayout(null);
+		choice.setBounds(70, 5, 250, 40);
+		t_pw.setBounds(70, 70, 250, 40);
+		
+		choice.addItem("카드 선택해주세요.");
 		
 		t_pw.setEchoChar((char) 0);
 		
 		bt_send.addActionListener(this);
-		/*bt_cancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			}
-		});*/
+		bt_cancel.addActionListener(this);
+		
 		t_pw.addFocusListener(this);
 		t_pw.setEchoChar((char) 0);
 		choice.addItemListener(this);
@@ -64,13 +77,14 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 		p_center.add(t_pw);
 		
 		p_south.add(bt_send);
-		//p_south.add(bt_cancel);
+		p_south.add(bt_cancel);
 		
 		add(p_center);
 		add(p_south, BorderLayout.SOUTH);
 		
-		setSize(300, 150);
+		setSize(400, 200);
 		setVisible(true);
+		setLocationRelativeTo(main);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		init();
@@ -102,7 +116,7 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 				
 				card_list.add(card);
 				
-				choice.add(card.getCard_companyname() + " : " + card.getCard_number());
+				choice.addItem(card.getCard_companyname() + " : " + card.getCard_number());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,22 +125,27 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String pw = t_pw.getText();
+		Object obj = e.getSource();
 		
-		System.out.println("사용자 입력 : " + pw);
-		if(index != 0) {
-			if(pw.equals(card_pw)) {
-				ClientThread thread = new ClientThread(main, orders_list, this);
-				thread.start();
+		if(obj == bt_cancel) {
+			this.dispose();
+		} else if(obj == bt_send) {
+			String pw = t_pw.getText();
+			
+			System.out.println("사용자 입력 : " + pw);
+			if(index != 0) {
+				if(pw.equals(card_pw)) {
+					ClientThread thread = new ClientThread(main, orders_list, this);
+					thread.start();
+				}
+				else {
+					JOptionPane.showMessageDialog(this, "카드 비밀번호를 확인해주세요.");
+				}
 			}
 			else {
-				JOptionPane.showMessageDialog(this, "카드 비밀번호를 확인해주세요.");
+					JOptionPane.showMessageDialog(this, "카드 선택을 해주세요!");
 			}
 		}
-		else {
-				JOptionPane.showMessageDialog(this, "카드 선택을 해주세요!");
-		}
-		
 		
 	}
 
