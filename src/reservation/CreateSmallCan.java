@@ -1,6 +1,7 @@
 package reservation;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -10,6 +11,10 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 
 public class CreateSmallCan extends Canvas{
 	URL url;
@@ -29,10 +34,10 @@ public class CreateSmallCan extends Canvas{
 			e2.printStackTrace();
 		}
 		
+		
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				main.p_south_center.removeAll();
-				
 				large = new CreateLargeCan(img, main);
 				main.p_south_center.add(large);
 				main.p_south.updateUI();
@@ -40,6 +45,8 @@ public class CreateSmallCan extends Canvas{
 		});
 	}
 	
+
+
 	public void paint(Graphics g) {
 		g.drawImage(img, 0, 30, 110, 110, main);
 		System.out.println("CreateSmallCan.java " + url.toString());

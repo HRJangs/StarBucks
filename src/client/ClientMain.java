@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -19,13 +18,11 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import board.BoardMain;
 import card.CardListMain;
@@ -33,6 +30,7 @@ import db.DBManager;
 import dto.Member;
 import dto.Product;
 import member.MemberWindow;
+import reservation.ReservationMain;
 
 public class ClientMain extends JPanel implements ActionListener {
 	// 메인 화면~!
@@ -40,18 +38,18 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel p_main = new JPanel();
 	JPanel p_north = new JPanel();
 
-	JButton bt_home,bt_map;
+	JButton bt_home, bt_map, bt_reserv;
 	Canvas can_logo;
 	JLabel la_north = new JLabel("안녕하세요. 스타벅스입니다.", JLabel.CENTER);
 
-	JPanel[] pageList = new JPanel[6];
+	JPanel[] pageList = new JPanel[7];
 
 	// 이미지
-	URL[] url = new URL[6];
 	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
 			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-			"http://localhost:9090/data/home.png","http://localhost:9090/data/map4.png" };
-	BufferedImage[] image = new BufferedImage[6];
+			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png", "http://localhost:9090/data/reservation.png" };
+	URL[] url = new URL[7];
+	BufferedImage[] image = new BufferedImage[7];
 
 	// 클라이언트 화면
 
@@ -73,6 +71,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		p_center = new JPanel();
 		p_map = new JPanel();
 		p_map.setLayout(new BorderLayout());
+		
 		// 이미지 url 얻어오기
 		try {
 			for (int i = 0; i < path.length; i++) {
@@ -86,11 +85,13 @@ public class ClientMain extends JPanel implements ActionListener {
 		can_logo = new Canvas() {
 			public void paint(Graphics g) {
 				g.drawImage((Image) image[0], 150, 0, 300, 30, this);
-
 			}
 		};
+		
 		bt_home = new JButton(new ImageIcon(image[4]));
 		bt_map = new JButton(new ImageIcon(image[5]));
+		bt_reserv = new JButton(new ImageIcon(image[6]));
+		
 		bt_rewards = new JButton("Rewards", new ImageIcon(image[1]));
 		bt_event = new JButton("Event");
 		bt_myPage = new JButton("My page");
@@ -128,6 +129,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		la_north.setBounds(0, 55, 600, 25);
 
 		add(p_main);
+		p_map.add(bt_reserv,BorderLayout.WEST);
 		p_map.add(bt_home);
 		p_map.add(bt_map,BorderLayout.EAST);
 		
@@ -143,6 +145,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_myPage.setBackground(Color.BLACK);
 		bt_card.setBackground(Color.BLACK);
 		bt_map.setBackground(Color.BLACK);
+		bt_reserv.setBackground(Color.BLACK);
 
 		bt_home.setForeground(Color.WHITE);
 		la_north.setForeground(Color.WHITE);
@@ -151,9 +154,13 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_event.setForeground(Color.WHITE);
 		bt_myPage.setForeground(Color.WHITE);
 		bt_card.setForeground(Color.WHITE);
-		bt_map.setForeground(Color.white);
+		bt_map.setForeground(Color.WHITE);
+		bt_reserv.setForeground(Color.WHITE);
+		
+		bt_reserv.setBorder(null);
 		
 		bt_map.setPreferredSize(new Dimension(45, 25));
+		bt_reserv.setPreferredSize(new Dimension(45, 25));
 		// 이미지내 텍스트 위치
 
 		bt_rewards.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -178,6 +185,8 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_card.addActionListener(this);
 		bt_home.addActionListener(this);
 		bt_map.addActionListener(this);
+		bt_reserv.addActionListener(this);
+		
 		// 각종 데이터 다 가져오기(상품, 회원)
 		getData();
 
@@ -293,6 +302,8 @@ public class ClientMain extends JPanel implements ActionListener {
 			setPage(0);
 		} else if(obj== bt_map){
 			setPage(5);
+		} else if(obj== bt_reserv){
+			setPage(6);
 		}
 	}
 
@@ -302,6 +313,7 @@ public class ClientMain extends JPanel implements ActionListener {
 		ClientEdit clientEdit = new ClientEdit(this);
 		CardListMain card = new CardListMain(this);
 		ShowMap map = new ShowMap();
+		ReservationMain reservation = new ReservationMain(member);
 
 		pageList[0] = p_center;
 		pageList[1] = orders;
@@ -309,7 +321,9 @@ public class ClientMain extends JPanel implements ActionListener {
 		pageList[3] = clientEdit;
 		pageList[4] = card;
 		pageList[5] = map;
-		for (int i = 1; i < 6; i++) {
+		pageList[6] = reservation;
+		
+		for (int i = 1; i<pageList.length; i++) {
 			// 넣기
 			p_page.add(pageList[i]);
 			pageList[i].setVisible(false);
