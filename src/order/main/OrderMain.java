@@ -82,32 +82,22 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	Vector<ProductPanel> menu_list = new Vector<ProductPanel>();
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
-<<<<<<< HEAD
-	String[] coffee = {"http://211.238.142.120:9090/data/1.jpg","http://211.238.142.120:9090/data/2.jpg","http://211.238.142.120:9090/data/8.jpg","http://211.238.142.120:9090/data/9.jpg","http://211.238.142.120:9090/data/10.jpg",
-			"http://211.238.142.120:9090/data/11.jpg","http://211.238.142.120:9090/data/12.jpg","http://211.238.142.120:9090/data/13.jpg","http://211.238.142.120:9090/data/14.jpg","http://211.238.142.120:9090/data/15.jpg"};
-	String[] drink = {"http://211.238.142.120:9090/data/3.jpg","http://211.238.142.120:9090/data/4.jpg","http://211.238.142.120:9090/data/16.jpg","http://211.238.142.120:9090/data/17.jpg","http://211.238.142.120:9090/data/18.jpg"
-			,"http://211.238.142.120:9090/data/19.jpg","http://211.238.142.120:9090/data/20.jpg","http://211.238.142.120:9090/data/21.jpg","http://211.238.142.120:9090/data/22.jpg"};
-	String[] bread = {"http://211.238.142.120:9090/data/5.jpg","http://211.238.142.120:9090/data/6.jpg","http://211.238.142.120:9090/data/7.jpg","http://211.238.142.120:9090/data/23.jpg","http://211.238.142.120:9090/data/24.jpg",
-			"http://211.238.142.120:9090/data/25.jpg","http://211.238.142.120:9090/data/26.jpg","http://211.238.142.120:9090/data/27.jpg","http://211.238.142.120:9090/data/28.jpg"};
-	
-=======
-	String[] coffee = { "http://localhost:9090/data/1.jpg", "http://localhost:9090/data/2.jpg",
-			"http://localhost:9090/data/8.jpg", "http://localhost:9090/data/9.jpg", "http://localhost:9090/data/10.jpg",
-			"http://localhost:9090/data/11.jpg", "http://localhost:9090/data/12.jpg",
-			"http://localhost:9090/data/13.jpg", "http://localhost:9090/data/14.jpg",
-			"http://localhost:9090/data/15.jpg" };
-	String[] drink = { "http://localhost:9090/data/3.jpg", "http://localhost:9090/data/4.jpg",
-			"http://localhost:9090/data/16.jpg", "http://localhost:9090/data/17.jpg",
-			"http://localhost:9090/data/18.jpg", "http://localhost:9090/data/19.jpg",
-			"http://localhost:9090/data/20.jpg", "http://localhost:9090/data/21.jpg",
-			"http://localhost:9090/data/22.jpg" };
-	String[] bread = { "http://localhost:9090/data/5.jpg", "http://localhost:9090/data/6.jpg",
-			"http://localhost:9090/data/7.jpg", "http://localhost:9090/data/23.jpg",
-			"http://localhost:9090/data/24.jpg", "http://localhost:9090/data/25.jpg",
-			"http://localhost:9090/data/26.jpg", "http://localhost:9090/data/27.jpg",
-			"http://localhost:9090/data/28.jpg" };
 
->>>>>>> 5779959e7e4d36871afcbf473110af0d5b2d5b4e
+	String[] coffee = {"http://211.238.142.120:9090/data/1.jpg","http://211.238.142.120:9090/data/2.jpg",
+			"http://211.238.142.120:9090/data/8.jpg","http://211.238.142.120:9090/data/9.jpg","http://211.238.142.120:9090/data/10.jpg",
+			"http://211.238.142.120:9090/data/11.jpg","http://211.238.142.120:9090/data/12.jpg",
+			"http://211.238.142.120:9090/data/13.jpg","http://211.238.142.120:9090/data/14.jpg",
+			"http://211.238.142.120:9090/data/15.jpg"};
+	String[] drink = {"http://211.238.142.120:9090/data/3.jpg","http://211.238.142.120:9090/data/4.jpg",
+			"http://211.238.142.120:9090/data/16.jpg","http://211.238.142.120:9090/data/17.jpg","http://211.238.142.120:9090/data/18.jpg"
+			,"http://211.238.142.120:9090/data/19.jpg","http://211.238.142.120:9090/data/20.jpg",
+			"http://211.238.142.120:9090/data/21.jpg","http://211.238.142.120:9090/data/22.jpg"};
+	String[] bread = {"http://211.238.142.120:9090/data/5.jpg","http://211.238.142.120:9090/data/6.jpg",
+			"http://211.238.142.120:9090/data/7.jpg","http://211.238.142.120:9090/data/23.jpg",
+			"http://211.238.142.120:9090/data/24.jpg",
+			"http://211.238.142.120:9090/data/25.jpg","http://211.238.142.120:9090/data/26.jpg",
+			"http://211.238.142.120:9090/data/27.jpg","http://211.238.142.120:9090/data/28.jpg"};
+	
 	int total;
 	int order_number = 1;
 	JButton obj;

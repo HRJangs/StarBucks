@@ -47,16 +47,10 @@ public class ClientMain extends JPanel implements ActionListener {
 	JPanel[] pageList = new JPanel[7];
 	
 	// ÀÌ¹ÌÁö
-<<<<<<< HEAD
 	String[] path = { "http://211.238.142.120:9090/data/logo.png", "http://211.238.142.120:9090/data/main_reward_cup_ic.png",
 			"http://211.238.142.120:9090/data/main_card_ic.png", "http://211.238.142.120:9090/data/main_siren_ic.png",
 			"http://211.238.142.120:9090/data/home.png", "http://211.238.142.120:9090/data/map4.png", "http://211.238.142.120:9090/data/reservation.png" };
-=======
-	String[] path = { "http://localhost:9090/data/logo.png", "http://localhost:9090/data/main_reward_cup_ic.png",
-			"http://localhost:9090/data/main_card_ic.png", "http://localhost:9090/data/main_siren_ic.png",
-			"http://localhost:9090/data/home.png", "http://localhost:9090/data/map4.png",
-			"http://localhost:9090/data/reservation.png" };
->>>>>>> 5779959e7e4d36871afcbf473110af0d5b2d5b4e
+
 	URL[] url = new URL[7];
 	BufferedImage[] image = new BufferedImage[7];
 
