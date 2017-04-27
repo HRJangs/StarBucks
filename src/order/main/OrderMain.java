@@ -111,7 +111,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	String[] img_array = {};
 
 	public OrderMain(PosWindow posWindow) {
-
+		
 		for (int i = 0; i < url.length; i++) {
 			try {
 				url[i] = new URL("http://localhost:9090/data/jazz" + (i + 1) + ".mp3");

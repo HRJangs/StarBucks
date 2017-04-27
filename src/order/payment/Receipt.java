@@ -31,6 +31,8 @@ public class Receipt extends JFrame{
 	JPanel panel;
 
 	public Receipt(PaymentPanel paymentPanel, String type) {
+		
+		setTitle("¿µ¼öÁõ");
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
 		panel.setOpaque(true);

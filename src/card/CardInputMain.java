@@ -31,6 +31,8 @@ public class CardInputMain extends JFrame implements ActionListener{
 	JButton bt_commit, bt_cancel;
 	
 	public CardInputMain(String company_name, CardCompanyMain main) {
+		setTitle("카드 정보 입력 창");
+		
 		this.company_name = company_name;
 		this.main = main;
 		
