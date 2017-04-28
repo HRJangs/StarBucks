@@ -32,7 +32,7 @@ public class ShowMap extends JPanel implements ActionListener{
 	JButton bt_road,bt_1,bt_2,bt_3,bt_4,bt_5,bt_6,bt_7;
 	JButton[] bt_array = {bt_1,bt_2,bt_3,bt_4,bt_5,bt_6,bt_7};
 	String[] img_array={"http://211.238.142.120:9090/data/location_bt.png","http://211.238.142.120:9090/data/sogang1_bt.jpg","http://211.238.142.120:9090/data/sogang2_bt.jpg","http://211.238.142.120:9090/data/sogang3_bt.jpg","http://211.238.142.120:9090/data/sogang4_bt.jpg","http://211.238.142.120:9090/data/sogang5_bt.jpg","http://211.238.142.120:9090/data/sogang6_bt.jpg"};
-	String[] img_array2={"http://211.238.142.120:9090/data/location.png","http://211.238.142.120:9090/data/sogang1.jpg","http://211.238.142.120:9090/data/sogang2.jpg","http://211.238.142.120:9090/data/sogang3.jpg","http://211.238.142.120:9090/data/sogang4.jpg","http://211.238.142.120:9090/data/sogang5.jpg","http://211.238.142.120:9090/data/sogang6.jpg"};
+	String[] img_array2={"http://211.238.142.120:9090/data/location.jpg","http://211.238.142.120:9090/data/sogang1.jpg","http://211.238.142.120:9090/data/sogang2.jpg","http://211.238.142.120:9090/data/sogang3.jpg","http://211.238.142.120:9090/data/sogang4.jpg","http://211.238.142.120:9090/data/sogang5.jpg","http://211.238.142.120:9090/data/sogang6.jpg"};
 	JLabel la_info,la_top;
     public ShowMap() {
     	p_down_top= new JPanel();
