@@ -53,6 +53,6 @@ public class CouponPanel extends MyPanel implements ActionListener, TableModelLi
 	public void tableChanged(TableModelEvent e) {
 		int row = e.getFirstRow();
 		int col = e.getColumn();
-		dataController.editTable(model,e,"emp");
+		dataController.editTable(model,e,"coupon");
 	}
 }

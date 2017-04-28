@@ -44,7 +44,7 @@ public class MemberPanel extends MyPanel implements ActionListener,TableModelLis
 		p_south.add(choice);
 		p_south.add(t_search);
 		p_south.add(bt_search);
-		p_south.add(bt_origin);
+		//p_south.add(bt_origin);
 		
 		//버튼에 리스너 연결
 		//bt_edit.addActionListener(this);
@@ -73,13 +73,18 @@ public class MemberPanel extends MyPanel implements ActionListener,TableModelLis
 		}else if(obj == bt_coupon){
 			sendCoupon();
 		}else if(obj==bt_origin){
-			dataController.SearchMember();
+			System.out.println("눌럿니?");
+			dataController.data.removeAll(dataController.data);
+			dataController.getList("member");
+			model =(DataModel) dataController.getDataModel();
+			model.addTableModelListener(this);
+			table.setModel(model);
 		}
 	}
 
 	public void search(){
 		JOptionPane.showMessageDialog(this, "검색할게요");
-		//dataController.SearchMember();
+		dataController.SearchMember();
 	}
 	public void sendCoupon(){
 		String str =(String) dataController.data.get(row).get(1);

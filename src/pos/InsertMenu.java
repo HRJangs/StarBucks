@@ -43,10 +43,10 @@ public class InsertMenu extends JFrame implements ActionListener{
 		choice.add("Coffe");
 		choice.add("Drink");
 		choice.add("Bread");
-	
+		t_img.setEnabled(false);
 		p_center.add(t_name);
-		p_center.add(t_img);
 		p_center.add(t_price);
+		p_center.add(t_img);
 		p_center.add(choice);
 		p_south.add(bt_img);
 		p_south.add(bt_reg);
@@ -55,7 +55,7 @@ public class InsertMenu extends JFrame implements ActionListener{
 		bt_reg.addActionListener(this);
 		bt_img.addActionListener(this);
 		setVisible(true);
-		setSize(300,400);
+		setSize(300,200);
 		setLocationRelativeTo(null);
 	}
 

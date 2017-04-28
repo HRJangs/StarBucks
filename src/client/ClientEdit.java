@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -45,8 +46,9 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 	Member member;
 	JButton bt_reg;
 	ClientMain clientMain;
-	
+	JLabel la_coupon;
 	public ClientEdit(ClientMain clientMain) {
+		la_coupon = new JLabel("나의 쿠폰 현황");
 		setLayout(new BorderLayout());
 		this.member=clientMain.member;
 		this.clientMain = clientMain;
@@ -90,7 +92,10 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 	
 		t_name.setText(member.getMember_name());
 		t_nick.setText(member.getMember_nickname());
+		t_phone1.setText(member.getMember_phone().substring(3, 7));
+		t_phone2.setText(member.getMember_phone().substring(7, member.getMember_phone().length()));
 		t_coupon.setText(member.getMember_coupon());
+		
 		
 		p_container.setBounds(100,100,300,630);
 		p_content.setBackground(Color.white);
@@ -117,6 +122,16 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 			String day = Integer.toString(1+i);
 			ch_day.addItem(day);
 		}
+		String[] str =new String[3];
+		str = member.getMember_birth().split("/");
+		System.out.println(str[0]+"??");
+		System.out.println(str[1]);
+		System.out.println(str[2]);
+		
+		
+		setSelectedValue(ch_year,str[0]);
+		setSelectedValue(ch_mon,str[1]);
+		setSelectedValue(ch_day,str[2]);
 		//크기 지정
 		p_container.setPreferredSize(new Dimension(400, 400));
 		t_id.setPreferredSize(new Dimension(150, 30));
@@ -158,6 +173,7 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 		p_container.add(ch_year);
 		p_container.add(ch_mon);
 		p_container.add(ch_day);
+		p_container.add(la_coupon);
 		p_container.add(t_coupon);
 		p_container.add(bt_reg);
 		bt_reg.addActionListener(this);
@@ -168,6 +184,19 @@ public class ClientEdit extends JPanel implements FocusListener,ActionListener{
 		setVisible(true);
 		setPreferredSize(new Dimension(300*2, 400*2));
 	}
+	public  void setSelectedValue(JComboBox comboBox, String value)
+    {
+        String item;
+        for (int i = 0; i < comboBox.getItemCount(); i++)
+        {
+            item = (String)comboBox.getItemAt(i);
+            if (item.equalsIgnoreCase(value))
+            {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
 	@Override
 	public void focusGained(FocusEvent e) {
 		Object obj = e.getSource();

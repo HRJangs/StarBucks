@@ -67,10 +67,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 
 	JScrollPane scroll_menu, scroll_bt;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 	Canvas can;
 	BufferedImage image = null;
 
@@ -83,19 +80,10 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 	Vector<Orders> orders_list = new Vector<Orders>();
 	PosWindow posWindow;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 	ArrayList<String> coffee =new ArrayList<String>();
 	ArrayList<String> drink =new ArrayList<String>();
 	ArrayList<String> bread =new ArrayList<String>();
 	
-<<<<<<< HEAD
-		
-
-=======
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 	int total;
 	int order_number = 1001;
 	JButton obj;
@@ -188,11 +176,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		p_pay.setPreferredSize(new Dimension(400, 100)); // 결제하기 버튼 있는 패널
 															
 		p_topMenu.setPreferredSize(new Dimension(800, 70));// (상위)커피. 음료. 빵 세개의
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 		p_subMenu.setPreferredSize(new Dimension(800, 600)); // (하위)주문버튼들
 		p_music.setPreferredSize(new Dimension(600, 200));
 		
@@ -202,10 +186,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 		scroll_menu.setPreferredSize(new Dimension(400, 350));
 		//scroll_bt.setPreferredSize(new Dimension(800, coffee.length * 200));
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 
 		try {
 			URL image_url = new URL("http://211.238.142.120:9090/data/sb_join.png");
@@ -523,10 +504,7 @@ public class OrderMain extends JPanel implements ActionListener, Runnable, ItemL
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-<<<<<<< HEAD
 
-=======
->>>>>>> c3de646f32266b33cb6f3a097c6c5501f8abcfa0
 						cnt++;
 						
 						System.out.println("이거누르면 또 생성데");

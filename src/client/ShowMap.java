@@ -54,8 +54,8 @@ public class ShowMap extends JPanel implements ActionListener{
     	
     	la_top  = new JLabel("매장 안내(이미지를 클릭하시면 길찾기 페이지로 연결됩니다.)");
     	try {
-			img = ImageIO.read(new URL("http://localhost:9090/data/location.jpg"));
-			img2 = ImageIO.read(new URL("http://localhost:9090/data/mart_info.PNG"));
+			img = ImageIO.read(new URL("http://211.238.142.120:9090/data/location.jpg"));
+			img2 = ImageIO.read(new URL("http://211.238.142.120:9090/data/mart_info.PNG"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

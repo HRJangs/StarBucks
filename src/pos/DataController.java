@@ -113,7 +113,7 @@ public class DataController{
 		}
 	}
 	public void productList(){
-		String sql = "select p.product_id,p.product_name ,p.product_price,r.milk, r.coffee,r.honeybread,r.muffin,r.cake,r.apple,r.orange ,r.caramel,r.chocopowder,r.whitechocopowder,r.mango,r.grape,r.blueberry,r.tomato,r.hanrabong,r.bagle,r.scone,r.roll,r.danish,r.twist,r.triple_bean  from product p INNER JOIN recipe r on p.product_id = r.product_id  group by p.product_id";
+		String sql = "select p.product_id,p.product_name ,p.product_price,r.*  from product p INNER JOIN recipe r on p.product_id = r.product_id  group by p.product_id";
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
 		try {
