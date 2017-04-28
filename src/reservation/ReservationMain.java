@@ -101,6 +101,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 		la.setFont(new Font("°íµñ", Font.BOLD, 20));
 		bt_next = new JButton(">");
 		
+		
 		//»ö±ò
 		bt_show.setOpaque(true);
 		bt_show.setBackground(Color.WHITE);
@@ -135,7 +136,7 @@ public class ReservationMain extends JPanel implements ActionListener, ItemListe
 		choice.add("2¹ø ½ºÅÍµð·ë");
 		
 		p_north_east.add(bt_show);
-		
+		choice.select("1¹ø ½ºÅÍµð·ë");
 		
 		p_north.add(choice, BorderLayout.WEST);
 		p_north.add(p_cal, BorderLayout.CENTER);
