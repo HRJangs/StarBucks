@@ -45,7 +45,10 @@ public class Receipt extends JFrame{
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
 		String str = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-		String str_end = new SimpleDateFormat("yyyy-(MM+1)-dd").format(date);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+2;
+		int dat = cal.get(Calendar.DATE);
+		String str_end = year+"-"+month+"-"+dat;
 		
 		Vector<Orders> list = paymentPanel.payment.orders_list;
 		
@@ -58,7 +61,7 @@ public class Receipt extends JFrame{
 		
 		int total=0;
 		for(int i=0; i<list.size();i++){
-			sb.append("<div>"+list.get(i).getProduct_name()+" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ");
+			sb.append("<div>"+list.get(i).getProduct_name()+"<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ");
 			sb.append(CommaUtil.toNumFormat(list.get(i).getPrice())+" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1");
 			sb.append(" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "+CommaUtil.toNumFormat(list.get(i).getPrice())+"</div><br>");
 			total +=list.get(i).getPrice();
