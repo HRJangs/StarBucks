@@ -68,27 +68,27 @@ public class CallMain extends JFrame{
 		 * 항상 첫번째 패널에 에 호출하기
 		 * 리스트에 들어있는 나머지 호출은 한칸씩 옆으로 넘기고 --> 덮어쓰기
 		*/
-		
-		if(orderList.get(0).getOrders_type().equals("offline")) {
+		int last = orderList.size() - 1;
+		if(orderList.get(last).getOrders_type().equals("offline")) {
 			//네임 출력하디
 			//label[0].setText(orderList.get(0).getOrders_client_id() + "님 음료 나왔습니다.");
 			//나머지 배열은 옆으로 덮어쓰기
 			
-			backupList.add(Integer.toString(orderList.get(0).getOrders_client_id()));
+			backupList.add(Integer.toString(orderList.get(last).getOrders_client_id()));
 			
-		} else if(orderList.get(0).getOrders_type().equals("online")) {
+		} else if(orderList.get(last).getOrders_type().equals("online")) {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			sql = "select m.member_nickname from member m, orders o where m.member_id = o.orders_client_id and o.orders_client_id = ?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, orderList.get(0).getOrders_client_id());
+				pstmt.setInt(1, orderList.get(last).getOrders_client_id());
 				
 				rs = pstmt.executeQuery();
 				
 				String member_nickname = null;
-				System.out.println(orderList.get(0).getOrders_client_id());
+				System.out.println(orderList.get(last).getOrders_client_id());
 				while(rs.next()) {
 					//멤버 로그인 아이디를 받아와서 첫번째 아이디를 받아서 backuplist에 받아두기
 					member_nickname = rs.getString("m.member_nickname");

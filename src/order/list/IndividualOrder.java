@@ -83,7 +83,7 @@ public class IndividualOrder extends JPanel implements ActionListener{
 				gm.updateGoods();
 				
 				//orderlistmain의 getFinish호출하기
-				main.getFinish(order.getOrders_client_id());
+				main.getFinish(order.getOrders_client_id(), order.getOrders_type());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
