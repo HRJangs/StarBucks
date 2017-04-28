@@ -9,17 +9,12 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-
-import javax.swing.JOptionPane;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import db.DBManager;
-import dto.Orders;
-import goods.GoodsMain;
 
 public class ServerThread extends Thread {
 	Socket socket;
@@ -259,13 +254,12 @@ public class ServerThread extends Thread {
 			// 쿼리문 한번 날리고 한번 쉬자!
 			Thread.sleep(100);
 		} catch (IOException e) {
-			e.printStackTrace();
+			flag=false;//런죽이기~!
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
-			flag=false;
 		}
 	}
 

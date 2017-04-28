@@ -21,6 +21,7 @@ public class ClientThread extends Thread{
 	Vector<Product> product;
 	String msg;
 	OrdersPay pmain;
+	int ctn =0;
 	
 	//소켓 접속 관련
 		Socket socket;
@@ -59,6 +60,12 @@ public class ClientThread extends Thread{
 			String data = buffr.readLine();
 			
 			if(data.equals("주문완료")){
+				ctn++;
+				System.out.println("카운트세봐 "+ctn);
+			}
+			
+			if(ctn!=0&&ctn==pmain.ordermain.orders_list.size()){
+				
 				main.orders.p_center.removeAll();
 				pmain.ordermain.orders_list.removeAllElements();
 				pmain.ordermain.la_sum.setText("");
@@ -85,9 +92,9 @@ public class ClientThread extends Thread{
 		
 	}
 	public void send(){
+		System.out.println("clientThread : " + product.size());
 		for(int i=0; i<product.size();i++){
 			int product_id = product.get(i).getProduct_id();
-	
 			int id=main.member.getMember_id();
 			
 			//위 해당내용을 보낼 수 있는 json 프로토콜 만들기

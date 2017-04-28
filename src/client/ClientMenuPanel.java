@@ -131,7 +131,7 @@ public class ClientMenuPanel extends JPanel implements ActionListener {
 		p_count++;
 
 		clientOrders.orders_list.add(product);
-		System.out.println("제품 주문에 추가됨");
+		System.out.println("제품 주문에 추가됨"+clientOrders.orders_list.size());
 
 		// 총 갯수
 		int count = 0;
