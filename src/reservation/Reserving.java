@@ -32,7 +32,7 @@ public class Reserving extends JFrame implements ActionListener{
 	int maxUnit;
 	
 	public Reserving(ReservationMain reservationMain, int date, int time, int maxUnit) {
-		setTitle("예약 하기창");
+		setTitle("예약 하기");
 		
 		this.reservationMain = reservationMain;
 		this.date = date;

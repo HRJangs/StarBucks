@@ -28,6 +28,8 @@ public class ReservationThread extends Thread{
 	BufferedReader buffr;
 	BufferedWriter buffw;
 	
+	int cnt;
+	
 	public ReservationThread(Vector<Reservation> resList, String type, JFrame frame, ReservationMain reservationMain) {
 		this.resList = resList;
 		this.type = type;
@@ -58,17 +60,25 @@ public class ReservationThread extends Thread{
 			String data = buffr.readLine();
 			
 			if(data.equals("예약 완료")){
-				System.out.println("예약 완료");
-				JOptionPane.showMessageDialog(frame, "예약 완료");
-				frame.dispose();
-				reservationMain.p_center.removeAll();
-				reservationMain.attachPanel();
+				cnt++;
+				if(cnt==resList.size()){
+					System.out.println("예약 완료");
+					JOptionPane.showMessageDialog(frame, "완료");
+					frame.dispose();
+					reservationMain.p_center.removeAll();
+					reservationMain.attachPanel();
+					cnt=0;
+				}
 			} else if(data.equals("예약 변경&삭제 완료")) {
-				System.out.println("예약 변경&삭제 완료");
-				JOptionPane.showMessageDialog(frame, "예약 완료");
-				frame.dispose();
-				reservationMain.p_center.removeAll();
-				reservationMain.attachPanel();
+				cnt++;
+				if(cnt==resList.size()){
+					System.out.println("예약 변경&삭제 완료");
+					JOptionPane.showMessageDialog(frame, "예약 변경&삭제 완료");
+					frame.dispose();
+					reservationMain.p_center.removeAll();
+					reservationMain.attachPanel();
+					cnt=0;
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

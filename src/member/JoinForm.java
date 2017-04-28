@@ -526,8 +526,12 @@ public class JoinForm extends JPanel implements ActionListener, FocusListener {
 
 		Object obj = e.getSource();
 		if (obj == bt_trans) {
-			if (join_valCheck())
+			if (join_valCheck()) {
 				trans();
+				JOptionPane.showMessageDialog(this, "회원가입 완료");
+				memberWindow.setPage(0);
+			}
+			
 		} else if (obj == bt_cancel) {
 			cancel();
 			memberWindow.setPage(0);

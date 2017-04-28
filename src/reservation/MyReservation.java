@@ -108,7 +108,7 @@ public class MyReservation extends JFrame implements ActionListener{
 				thread.start();
 			}
 			
-		} else if(type.equals("prev") || type.equals("next")) {
+		} else if(type.equals("prev")) {
 			if(selectTime == 1) {
 				Reservation reservation = new Reservation();
 				reservation.setReservation_room_num(reservationMain.roomNum);
@@ -118,6 +118,26 @@ public class MyReservation extends JFrame implements ActionListener{
 				reservation.setReservation_date(date);	
 				reservation.setReservation_time_unit(1);
 				reservation.setReservation_start_time(time);
+				
+				resList.add(reservation);
+				
+				thread = new ReservationThread(resList, "delete", this, reservationMain);
+				thread.start();
+
+			}
+			else {
+				System.out.println("변경 사항 없음.");
+			}
+		}else if(type.equals("next")) {
+			if(selectTime == 1) {
+				Reservation reservation = new Reservation();
+				reservation.setReservation_room_num(reservationMain.roomNum);
+				reservation.setReservation_member_login_id(reservationMain.dto.getMember_login_id());
+				reservation.setReservation_year(reservationMain.year);
+				reservation.setReservation_month(reservationMain.month + 1);
+				reservation.setReservation_date(date);	
+				reservation.setReservation_time_unit(1);
+				reservation.setReservation_start_time(time + 1);
 				
 				resList.add(reservation);
 				
