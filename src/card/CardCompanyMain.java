@@ -21,6 +21,9 @@ public class CardCompanyMain extends JFrame implements ActionListener {
 	JButton[] bt_card = new JButton[10];
 
 	public CardCompanyMain(CardListMain main) {
+		
+		setTitle("카드 회사 선택");
+		
 		this.main = main;
 		p_north = new JPanel();
 		p_center = new JPanel();
@@ -72,6 +75,7 @@ public class CardCompanyMain extends JFrame implements ActionListener {
 
 		setSize(400, 300);
 		setVisible(true);
+		setLocationRelativeTo(main);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 	}

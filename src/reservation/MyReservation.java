@@ -33,6 +33,8 @@ public class MyReservation extends JFrame implements ActionListener{
 	String type;
 	
 	public MyReservation(ReservationMain reservationMain, int date, int time, int maxUnit, String type) {
+		setTitle("내 예약 수정창");
+		
 		this.reservationMain = reservationMain;
 		this.date = date;
 		this.time = time;
@@ -74,7 +76,7 @@ public class MyReservation extends JFrame implements ActionListener{
 		add(p_center);
 		add(p_south, BorderLayout.SOUTH);
 		
-		setSize(300, 200);
+		setSize(300, 150);
 		setVisible(true);
 		setLocationRelativeTo(reservationMain);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

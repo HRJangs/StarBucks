@@ -29,6 +29,8 @@ public class MemberWindow extends JFrame {
 		add(page[0]);
 		add(page[1]);
 		add(page[2]);
+		
+		setTitle("client window");
 
 		setPage(0);
 		setVisible(true);

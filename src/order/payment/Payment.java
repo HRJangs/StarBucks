@@ -51,6 +51,9 @@ public class Payment extends JFrame implements ActionListener{
 	
 	
 	public Payment(Vector<Orders> orders_list, int price, Emp emp) {
+		
+		setTitle("결제창");
+		
 		this.emp=emp;
 		
 		//일단 리스트는 가져오는데 0으로 처리되니깐 일단 이걸 막아놔야한다~!

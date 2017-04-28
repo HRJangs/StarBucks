@@ -107,6 +107,8 @@ public class ClientMain extends JPanel implements ActionListener {
 		bt_myPage = new JButton("My page");
 		bt_card = new JButton("Card", new ImageIcon(image[2]));
 		bt_orders = new JButton("Siren Order", new ImageIcon(image[3]));
+		
+		bt_reserv.setFocusable(false);
 
 		// À§Ä¡
 		p_center.setPreferredSize(new Dimension(600, 750));

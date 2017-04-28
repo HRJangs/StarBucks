@@ -17,6 +17,7 @@ public class PosWindow extends JFrame {
 	JPanel[] page = new JPanel[3];
 
 	public PosWindow() {
+		setTitle("POS Window");
 		setLayout(new FlowLayout());
 
 		page[0] = new LoginForm(this);

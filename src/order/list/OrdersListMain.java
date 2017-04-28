@@ -41,7 +41,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		con = manager.getConnection();
 		
 		this.setLayout(new FlowLayout());
-		this.setTitle("                주문한 제품 이름                             client_id, orders_id");
+		this.setTitle("주문 리스트         주문한 제품 이름                          client_id, orders_id");
 		
 		p_orderList = new JPanel();
 		scroll = new JScrollPane(p_orderList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -60,7 +60,7 @@ public class OrdersListMain extends JFrame implements Runnable{
 		pack();
 		//setSize(520, 600);
 		setVisible(true);
-		setLocationRelativeTo(null);
+		setLocation(1300, 100);
 	}
 	
 	public void getOrderList() {//나중에 쓰레드 안에 들어갈 메서드
