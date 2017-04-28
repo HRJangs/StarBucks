@@ -141,6 +141,7 @@ public class OrdersPay extends JFrame implements ActionListener, FocusListener, 
 				if(index != 0) {
 					if(pw.equals(card_pw)) {
 						ClientThread thread = new ClientThread(main, orders_list, this);
+						System.out.println(orders_list.size());
 						thread.start();
 					}
 					else {

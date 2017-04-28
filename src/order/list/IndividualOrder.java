@@ -33,8 +33,8 @@ public class IndividualOrder extends JPanel implements ActionListener{
 		this.main = main;
 		this.order = order;
 		
-		la_order_west = new JLabel(order.getProduct_name(), JLabel.CENTER);
-		la_order_center = new JLabel(Integer.toString(order.getOrders_client_id()) +", " + order.getOrders_id(), JLabel.CENTER);
+		la_order_west = new JLabel(order.getOrders_id() + ":  " + order.getProduct_name(), JLabel.CENTER);
+		la_order_center = new JLabel(Integer.toString(order.getOrders_client_id()) +", " + order.getOrders_type(), JLabel.CENTER);
 		bt_finish = new JButton("¿Ï·á");
 		bt_finish.setForeground(Color.white);
 		la_order_west.setFont(new Font("±¼¸²", Font.BOLD, 15));
